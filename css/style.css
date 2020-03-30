@@ -9,21 +9,23 @@ EN TETE
 
 header
 {
-    width:100%;
+    width:90%;
     height: 20%;
     display: flex;
     flex-direction:column;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9);
+    
     margin-bottom: 2%;
     margin-top:2%;
-    border-bottom:#26c98b 5px solid;
+    margin-left:5%;
+    border-bottom:#7bdbd6 5px solid;
 }
 
 header h1
 { 	
 	font-size: 3.6em;
 	font-family: 'indie_flowerregular', 'Trebuchet MS', serif; 
-  color: #26c98b;
+  color: #09c9bf;
   font-weight:bold;
   z-index: 4;
   margin-left:4%;
@@ -49,7 +51,7 @@ GRILLE DE LA PAGE DACCUEIL
     grid-template-columns: 31% 31% 31%;
     grid-column-gap:3.5%;
     grid-row-gap:5%;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     padding:1.5%;
     width: 91%;
     margin:auto;
@@ -60,7 +62,7 @@ GRILLE DE LA PAGE DACCUEIL
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    border: 2px solid #14874e;
+    border: 2px solid #09c9bf;
     padding: 20px;
     font-size: 30px;
     text-align: center;
@@ -77,7 +79,7 @@ GRILLE DE LA PAGE DACCUEIL
   height:35%;
   margin-top:4%;
   width:35%;
-  background-color:#a2face;
+  background-color:#09c9bf;
   color:black;
   font-weight: bold;
 }
@@ -98,12 +100,12 @@ GRILLE DE LA PAGE DACCUEIL
 }
 .grid-content span{
   margin-right:3%;
-  color:#14874e;
+  color:#09c9bf;
   font-size: 1.6em;
 }
 button{
   font-size:0.5em;
-  background-color: #b2f7dd;
+  background-color:#7bdbd6;
   color:black;
   opacity:1;
 }
@@ -155,7 +157,7 @@ MENU DE NAVIGATION
   }
   nav a:hover
   {
-      color: #00ed86;
+      color: #09c9bf;
   }
   nav ul ul 
   {
@@ -199,5 +201,7 @@ MENU DE NAVIGATION
 /*OTHER*/
 
 body{
-  background-color:white;
+  /*background-color:white;*/
+  background-image:url('images/test.jpg'); 
+  background-size: repeat;
 }
