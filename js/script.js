@@ -54,6 +54,7 @@ function initLoad()
 			chargementPageRecapitulatif()
 
 		}
+		
 		//Chargement de la page à propos & contact
 		if(testAproposContact!=-1)
 		{
@@ -74,7 +75,7 @@ function chargementPageIndex()
 		let clone = document.importNode(template.content, true);   
 		newContent = clone.firstElementChild.innerHTML	
 			.replace(/{{destination}}/g, v.destination)		
-			.replace(/{{prix}}/g, v.prix)
+			.replace(/{{prix}}/g, v.prixVoyage)
 			.replace(/{{monId}}/g, v.id);	
 		clone.firstElementChild.innerHTML = newContent;
 		clone.firstElementChild.style.backgroundImage=v.image;
@@ -87,14 +88,13 @@ function chargementPageReservation()
 {
 
 	//Ouverture page réservation avec un id choisi 
-	let idReservation = url.split('=');
+	var idReservation = getUrlParam()["id"];
 	console.log(idReservation);
 		//Récupération du template
 		let templateWithId = document.querySelector("#templateReservationWithId");
-	
 		//Récupération de la destionation choisi
 		for (var v of lesDestinations) {
-			if(v.id===idReservation[1])	
+			if(v.id===idReservation)	
 			{			
 				laDestinationChoisi=v;
 				console.log(laDestinationChoisi);
@@ -102,12 +102,16 @@ function chargementPageReservation()
 				newContent = cloneId.firstElementChild.innerHTML	
 					.replace(/{{villeId}}/g, v.destination)	
 				cloneId.firstElementChild.innerHTML = newContent;
-				document.getElementById('containerReservationWithId').appendChild(cloneId);		
+				document.getElementById('containerReservationWithId').appendChild(cloneId);	
+				
+				let header=document.querySelector('header');
+				console.log(header);
+
 			}	
 		};
 
 	//Ouverture de la page sans choix initial la liste
-	if(idReservation.length==1)
+	if(idReservation==undefined )
 	{
 		console.log("here");
 		//Récupération du template
@@ -159,4 +163,11 @@ function validForm()
 
 }
 
+function getUrlParam() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
 
