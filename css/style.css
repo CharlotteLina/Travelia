@@ -1,0 +1,203 @@
+/*//////////////////////////////////////////////////////////////
+ DEFINITION DES POLICES PERSONNALISES
+ //////////////////////////////////////////////////////////////*/
+
+
+/*//////////////////////////////////////////////////////////////
+EN TETE
+ //////////////////////////////////////////////////////////////*/
+
+header
+{
+    width:100%;
+    height: 20%;
+    display: flex;
+    flex-direction:column;
+    background-color: white;
+    margin-bottom: 2%;
+    margin-top:2%;
+    border-bottom:#26c98b 5px solid;
+}
+
+header h1
+{ 	
+	font-size: 3.6em;
+	font-family: 'indie_flowerregular', 'Trebuchet MS', serif; 
+  color: #26c98b;
+  font-weight:bold;
+  z-index: 4;
+  margin-left:4%;
+}
+
+header img
+{
+    width: 20%;
+    height: 22%;
+    position: absolute;
+    z-index:1;
+    left:3%;
+    top:-2%;
+
+}
+/*//////////////////////////////////////////////////////////////
+GRILLE DE LA PAGE DACCUEIL 
+ //////////////////////////////////////////////////////////////*/
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 31% 31% 31%;
+    grid-column-gap:3.5%;
+    grid-row-gap:5%;
+    background-color: white;
+    padding:1.5%;
+    width: 91%;
+    margin:auto;
+    height: auto;
+  }
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 2px solid #14874e;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    height: 15vmax 80%;
+    border-radius: 5px;
+  }
+
+.grid-item:hover{
+ height: 96%;
+ margin-top:-6%;
+} 
+
+.grid-item:hover button{
+  height:35%;
+  margin-top:4%;
+  width:35%;
+  background-color:#a2face;
+  color:black;
+  font-weight: bold;
+}
+
+
+.grid-content{
+  justify-content: baseline;
+  background-color: white;
+  opacity:0.9;
+  margin-top:42%;
+  height:37%
+}
+
+.grid-content p{
+  font-size:0.6em;
+  margin-bottom: -0.6%;
+
+}
+.grid-content span{
+  margin-right:3%;
+  color:#14874e;
+  font-size: 1.6em;
+}
+button{
+  font-size:0.5em;
+  background-color: #b2f7dd;
+  color:black;
+  opacity:1;
+}
+
+/*//////////////////////////////////////////////////////////////
+PIED DE PAGE
+ //////////////////////////////////////////////////////////////*/
+
+ footer
+ {
+   text-align: center;
+   font-family:'Trebuchet MS';
+   color: black;
+   margin-top: 35px;
+   font-size: 1em;
+ }
+/*//////////////////////////////////////////////////////////////
+MENU DE NAVIGATION 
+ //////////////////////////////////////////////////////////////*/
+
+  nav
+  {
+    height: auto;
+    font-family:'capture_itregular', Trebuchet MS, sherif;
+    opacity: 0.9;
+    width: 60%;
+    margin-left:35%;
+    margin-bottom: 2%;
+    margin-top:-5%;
+    z-index:3;
+  }
+  nav ul
+  {
+      list-style-type: none;
+      display:flex;
+      text-align: left;
+  }
+  nav li
+  { 
+    width: 33%;
+
+  }
+  nav a
+  {
+      font-size: 1.2em;
+      display: block;
+      color: #646b68;
+      text-decoration: none;
+  }
+  nav a:hover
+  {
+      color: #00ed86;
+  }
+  nav ul ul 
+  {
+    display: none;
+    position: relative;
+    padding-bottom: 15px;
+    padding-left: 9px;
+  
+  }
+  nav li ul
+  {
+    position:absolute;
+  }
+  li:hover ul li
+  {
+    float: none;
+  }
+  nav ul li:hover ul
+  {
+    display: block;
+    position: relative;
+    padding-top: 15px;
+    background-color: white;
+    font-size:0.7em;
+    opacity:0.8;
+    width:40%;
+    margin-left: 35%;
+  }
+  nav ul li:hover ul li
+  {
+    display: flex;
+    width: 100%;
+    margin-top: 5px;
+  }
+  nav ul li ul a:hover
+  {
+    color:#4dc3ff;
+  }
+
+
+/*OTHER*/
+
+body{
+  background-color:white;
+}

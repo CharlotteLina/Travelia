@@ -1,0 +1,44 @@
+[
+{
+	"id":"1",
+	"destination":"Bali",
+	"prix":"4€",
+	"image":"url('css/images/Bali.jpg')"
+
+},
+{
+	"id":"2",
+	"destination":"New-York",
+	"prix":"10€",
+	"image":"url('css/images/NewYork.jpg')"
+
+},
+{
+	"id":"3",
+	"destination":"Rio de janeiro",
+	"prix":"100€",
+	"image":"url('css/images/Rio.jpeg')"
+
+},
+{
+	"id":"4",
+	"destination":"Londres",
+	"prix":"100€",
+	"image":"url('css/images/Londres.jpg')"
+
+},
+{
+	"id":"5",
+	"destination":"Paris",
+	"prix":"100€",
+	"image":"url('css/images/Paris.jpg')"
+
+},
+{
+	"id":"6",
+	"destination":"Venise",
+	"prix":"100€",
+	"image":"url('css/images/Venise.jpg')"
+
+}
+]

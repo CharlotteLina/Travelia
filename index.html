@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+		<script src="js\script.js"></script>
+		<title> PageAccueil </title>
+	</head>
+
+	<body onload="initLoad()">
+	<header ></header>
+
+	<section>
+			
+		<div class="grid-container" id="containeVoyage">
+		<template id="templateVoyage">
+				<div class="grid-item">
+					<div class="grid-content">
+					
+					<p><span>{{destination}}</span>A partir de {{prix}} </p>
+					<button onclick="reservation('{{monId}}')">Réserver</button>
+					</div>
+				</div>
+		</template>
+		</div>
+	</section>
+
+	<footer></footer>
+	</body>
+</html>

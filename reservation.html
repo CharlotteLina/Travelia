@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" href="css/style.css"/>
+		<script src='js\script.js'></script>
+
+		<title> Reservations </title>
+	</head>
+
+	<body onload="initLoad()">
+	<header ></header>
+
+	<section>
+		<h2>Réservations</h2>
+
+		<!--Chargement de la page avec un pays choisi-->
+		<div id="containerReservationWithId"></div>
+			<template id="templateReservationWithId">
+				<h2>pour {{villeId}}</h2>
+
+						<form  method="post" class="form-example">
+							<div class="form-example">
+							  <label for="name">Enter your name: </label>
+							  <input type="text" name="name" id="name" required>
+							</div>
+							<div class="form-example">
+							</div>
+						</form>
+						<button onclick="validForm()">Valider</button>
+
+			</template>
+
+		<!--Chargement de la page avec un pays choisi-->
+		<div id="containerReservationWithoutId">
+			<template id="templateReservationWithoutId">
+
+					<div>	{{ListeVille}} </div>	
+			</template>
+		</div>
+
+
+	</section>
+
+	<footer></footer>
+	</body>
+</html>
