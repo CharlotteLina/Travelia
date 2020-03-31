@@ -8,7 +8,7 @@
 },
 {
 	"id":"2",
-	"destination":"New-York",
+	"destination":"New York",
 	"prix":"10€",
 	"image":"url('css/images/NewYork.jpg')"
 

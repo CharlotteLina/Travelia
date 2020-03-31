@@ -11,13 +11,12 @@
 	<header ></header>
 
 	<section>
-			
+
 		<div class="grid-container" id="containeVoyage">
 		<template id="templateVoyage">
 				<div class="grid-item">
 					<div class="grid-content">
-					
-					<p><span>{{destination}}</span>A partir de {{prix}} </p>
+					<p id={{destination}}><span>{{destination}}</span>A partir de {{prix}} {{temp}}°C  </p>
 					<button onclick="reservation('{{monId}}')">Réserver</button>
 					</div>
 				</div>

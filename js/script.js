@@ -70,11 +70,25 @@ function initLoad()
 function chargementPageIndex()
 {
 	var template = document.querySelector("#templateVoyage");
-	for (var v of lesDestinations) {					
+	
+	for (var v of lesDestinations) {
+
+		var xhttp = new XMLHttpRequest;
+		let request='http://api.openweathermap.org/data/2.5/weather?q='+"v.destination"+'&appid=551afb494d45ea0dbed796d9c6efc0e6';
+		xhttp.open("GET",request,false);
+		xhttp.onload=function ()
+		{
+			let response=JSON.parse(xhttp.response);
+			v.temp=Math.floor(response.main.temp-273.15);
+		}
+		xhttp.send();
+
+		console.log(xhttp.response);
 		let clone = document.importNode(template.content, true);   
 		newContent = clone.firstElementChild.innerHTML	
 			.replace(/{{destination}}/g, v.destination)		
 			.replace(/{{prix}}/g, v.prix)
+			.replace(/{{temp}}/g, v.temp)
 			.replace(/{{monId}}/g, v.id);	
 		clone.firstElementChild.innerHTML = newContent;
 		clone.firstElementChild.style.backgroundImage=v.image;
