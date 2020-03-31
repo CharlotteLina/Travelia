@@ -211,12 +211,6 @@ body{
 /*//////////////////////////////////////////////////////////////
 Page de contact
  //////////////////////////////////////////////////////////////*/
- .grid-container {
-	display: grid;
-	grid-template-columns: 33% 33% 33%;
-	background-color: #2196f3;
-	padding: 10px;
-}
 .grid-item {
 	background-color: rgba(255, 255, 255, 0.8);
 	border: 1px solid rgba(0, 0, 0, 0.8);
@@ -225,7 +219,7 @@ Page de contact
 	text-align: center;
 }
 
-.container:nth-child(even) {
+.container-contact:nth-child(even) {
 	width: 80%;
 	height: auto;
 	margin: 0 auto;
@@ -234,7 +228,7 @@ Page de contact
 	text-align: center;
 	padding-top: 5em;
 }
-.container:nth-child(odd) {
+.container-contact:nth-child(odd) {
 	width: 80%;
 	height: auto;
 	margin: 0 auto;
@@ -250,8 +244,8 @@ Page de contact
 	padding-right: 4em;
 }
 
-.test {
-	width: 140px;
+.photo {
+	width: 130px;
 	height: 150px;
 }
 
