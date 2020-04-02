@@ -71,28 +71,33 @@ function chargementPageIndex()
 {
 	var template = document.querySelector("#templateVoyage");
 	
-	for (var v of lesDestinations) {
-
-		var xhttp = new XMLHttpRequest;
-		let request='http://api.openweathermap.org/data/2.5/weather?q='+"v.destination"+'&appid=551afb494d45ea0dbed796d9c6efc0e6';
-		xhttp.open("GET",request,false);
-		xhttp.onload=function ()
-		{
-			let response=JSON.parse(xhttp.response);
-			v.temp=Math.floor(response.main.temp-273.15);
-		}
-		xhttp.send();
-
-		console.log(xhttp.response);
+	for (var v of lesDestinations) {	
 		let clone = document.importNode(template.content, true);   
 		newContent = clone.firstElementChild.innerHTML	
 			.replace(/{{destination}}/g, v.destination)		
 			.replace(/{{prix}}/g, v.prix)
-			.replace(/{{temp}}/g, v.temp)
 			.replace(/{{monId}}/g, v.id);	
 		clone.firstElementChild.innerHTML = newContent;
 		clone.firstElementChild.style.backgroundImage=v.image;
-		document.getElementById('containeVoyage').appendChild(clone);			
+		document.getElementById('containeVoyage').appendChild(clone);	
+		
+
+		var xhttp = new XMLHttpRequest;
+		let request='http://api.openweathermap.org/data/2.5/weather?q='+v.destination+'&appid=551afb494d45ea0dbed796d9c6efc0e6';
+		xhttp.open("GET",request,true);
+
+		xhttp.onload=function()
+		{
+			let response=JSON.parse(xhttp.response);
+			console.info(response);
+			tmp=Math.floor(response.main.temp-273.15);
+			id=response.name
+			let x=Document.getElementById(id);
+			x.innerHTML.replace(/{{temp}}/g, tmp)
+			console.info("id : "+id)
+		}
+		xhttp.send();
+
 	};
 }
 
@@ -114,10 +119,10 @@ function chargementPageReservation()
 				console.log(laDestinationChoisi);
 				let cloneId = document.importNode(templateWithId.content, true);   
 				newContent = cloneId.firstElementChild.innerHTML	
-					.replace(/{{villeId}}/g, v.destination)	
+				.replace(/{{villeId}}/g, v.destination)	
 				cloneId.firstElementChild.innerHTML = newContent;
 				document.getElementById('containerReservationWithId').appendChild(cloneId);		
-			}	
+			}
 		};
 
 	//Ouverture de la page sans choix initial la liste
