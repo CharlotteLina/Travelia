@@ -81,7 +81,6 @@ function chargementPageIndex()
 		clone.firstElementChild.innerHTML = newContent;
 		clone.firstElementChild.style.backgroundImage=v.image;
 		document.getElementById('containeVoyage').appendChild(clone);
-		
 		temperature(v.id,v.destination);
 	};
 }
@@ -155,9 +154,9 @@ function chargementPageReservation()
 
 
 		//Récupération des destionation
-		var listeDestination="<FORM> <SELECT name='dest' size='1''>";
+		var listeDestination="<FORM> <SELECT id='listeVille' name='dest' size='1''>";
 		for (var v of lesDestinations) {
-			listeDestination+="<OPTION>"+v.destination;
+			listeDestination+="<OPTION value='"+v.id+"'>"+v.destination;
 		};
 		listeDestination+="</SELECT></FORM>";
 			console.log(v.destination);
@@ -186,7 +185,20 @@ function chargementPageRecapitulatif()
 	var petitDej = sessionStorage.getItem("petitDej"); 
 	var infoComple = sessionStorage.getItem("infoComple");
 
-
+    //On change la valeur écrite de petitDej
+    if(petitDej==true){petitDej="Compris";}
+    else{petitDej="Non Compris";}
+    
+    //On change la valeur de nbAdulte 
+    if(nbAdulte==1){nbAdulte=nbAdulte+" adulte"}
+    else{nbAdulte=nbAdulte+" adultes"}
+    
+    //On change la valeur de nbEnfant 
+    if(nbEnfant==0){nbEnfant="."}
+    else{
+        if(nbEnfant==1){nbEnfant=" et "+nbEnfant+ " enfant. "}
+        else{bEnfant=" et "+nbEnfant+ " enfants. "}
+    }
 	//Récupération des template
 	let templateRecap = document.querySelector("#templateRecapitulatif");
 
@@ -216,12 +228,20 @@ function recapitulatif(numeroRes)
 	//AJOUTER ID RESERVATION
 	window.location.assign("http://127.0.0.1:5500/recapitulatif.html?id+"+numeroRes);
 }
+//Lien pour réservation de l'onglet réservation
+function reserverChoose() {
+	
+	var id=document.getElementById('listeVille').value;
+	reservation(id);	
+}
 
 //Lien pour la réservation
 function reservation(id)
 {
 	window.location.assign("http://127.0.0.1:5500/reservation.html?id="+id);
 }
+
+
 
 function validForm()
 {
@@ -236,44 +256,71 @@ function validForm()
 	var dateR = document.getElementById("dateRetour").value;
 	var nbAdulte = document.getElementById("nbAdulte").value;
 	var nbEnfant = document.getElementById("nbEnfant").value;
-	var petitDej = document.getElementById("petitDej").value;
+	var petitDej = document.getElementById("petitDej").checked;
 	var infoComple = document.getElementById("infoComple").value;
 
+	var errorZone=document.getElementById("errorMessage");
 
-	if(nameValue==null||nameValue=="")
+	//Vérification informations personnelles
+	if(nameValue==null||nameValue==""||usernameValue==null||usernameValue==""||email==null||email==""||phone==null||phone=="")
 	{
-		console.log("Il faut un nom");
+		errorZone.innerHTML="Il faut un nom,un prénom,un email et un numéro de téléphone";
+		errorZone.style.visibility="visible";
 	}
 	else
 	{
-		if(usernameValue==null||usernameValue=="")
+
+		var dD=new Date(dateD);
+		var dR=new Date(dateR);
+		//Vérication saisie des dates
+		if(dD=="Invalid Date"||dR=="Invalid Date" )
 		{
-			console.log("Il faut un nom");
+			errorZone.innerHTML="Il faut une date d'arrivée et de retour";
+			errorZone.style.visibility="visible";
+
 		}
 		else
 		{
-			
+			var nbJ=dateDiff(dD,dR);
+			//Vérication date cohérente
+			if(nbJ<0)
+			{
+				errorZone.innerHTML="La date de retour doit être supérieur à celle d'arrivée";
+				errorZone.style.visibility="visible";
+
+			}
+			else
+			{
+				if(nbAdulte==0)
+				{
+					errorZone.innerHTML="Il faut au moins un adulte";
+					errorZone.style.visibility="visible";
+s
+				}
+				else
+				{
+					//On créer le numéro de reservation
+					var numeroRes=Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+					sessionStorage.setItem("numeroReservation",numeroRes); 
+					sessionStorage.setItem("name",nameValue); 
+					sessionStorage.setItem("username",usernameValue); 
+					sessionStorage.setItem("email",email); 
+					sessionStorage.setItem("phone",phone); 
+					sessionStorage.setItem("dateD",dateD); 	
+					sessionStorage.setItem("dateR",dateR); 
+					sessionStorage.setItem("nbAdulte",nbAdulte); 	
+					sessionStorage.setItem("nbEnfant",nbEnfant); 
+					sessionStorage.setItem("petitDej",petitDej); 	
+					sessionStorage.setItem("infoComple",infoComple); 
+					recapitulatif(numeroRes);
+				}
+			}
 		}
+
+		
+	
 	}
-	//FAIRE TOUT LES TESTS POUR CHAQUE CHAMPS AVANT LE RESTE
 
-	//On créer le numéro de reservation
-	var numeroRes=Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
-
-
-	sessionStorage.setItem("numeroReservation",numeroRes); 
-	sessionStorage.setItem("name",nameValue); 
-	sessionStorage.setItem("username",usernameValue); 
-	sessionStorage.setItem("email",email); 
-	sessionStorage.setItem("phone",phone); 
-	sessionStorage.setItem("dateD",dateD); 	
-	sessionStorage.setItem("dateR",dateR); 
-	sessionStorage.setItem("nbAdulte",nbAdulte); 	
-	sessionStorage.setItem("nbEnfant",nbEnfant); 
-	sessionStorage.setItem("petitDej",petitDej); 	
-	sessionStorage.setItem("infoComple",infoComple); 
-
-	recapitulatif(numeroRes);
 
 }
 

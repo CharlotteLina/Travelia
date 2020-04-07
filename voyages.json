@@ -12,7 +12,7 @@
 },
 {
 	"id":"2",
-	"destination":"New-York",
+	"destination":"New York",
 	"prixVoyage":"1200",
 	"prixHotel":"100",
 	"image":"url('css/images/NewYork.jpg')",

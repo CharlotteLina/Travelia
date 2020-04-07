@@ -73,6 +73,7 @@
 						</div>
 					</form>
 					<div id="imageDest" style="border: #b7bdbc solid 1px; margin-right:4vw;width:30vw; height:90vh; background-color:black; float:right;" ></div>
+					<p id="errorMessage"></p>
 
 					<button class="validFormButton" onclick="validForm()">Valider</button>
 					</div>
@@ -82,12 +83,16 @@
 		<!--Chargement de la page avec un pays choisi-->
 		<div id="containerReservationWithoutId">
 			<template id="TitleReservation">
-				<h2>Réservations </h2>
+				<h2>Réservation </h2>
+				<p class="selectRes">Veuillez selectionner une destination</p>
 			</template>
 			<template id="templateReservationWithoutId">
 
 					<div>	{{ListeVille}} </div>	
+					<button class="reserverChoose" onclick="reserverChoose()">Valider</button>
+
 			</template>
+
 		</div>
 
 
