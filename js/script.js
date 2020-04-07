@@ -70,8 +70,7 @@ function initLoad()
 function chargementPageIndex()
 {
 	var template = document.querySelector("#templateVoyage");
-	
-	for (var v of lesDestinations) {	
+	for (var v of lesDestinations) {					
 		let clone = document.importNode(template.content, true);   
 		newContent = clone.firstElementChild.innerHTML	
 			.replace(/{{destination}}/g, v.destination)		
@@ -79,26 +78,27 @@ function chargementPageIndex()
 			.replace(/{{monId}}/g, v.id);	
 		clone.firstElementChild.innerHTML = newContent;
 		clone.firstElementChild.style.backgroundImage=v.image;
-		document.getElementById('containeVoyage').appendChild(clone);	
+		document.getElementById('containeVoyage').appendChild(clone);
 		
+		temperature(v.id,v.destination);
+	};
+}
 
-		var xhttp = new XMLHttpRequest;
-		let request='http://api.openweathermap.org/data/2.5/weather?q='+v.destination+'&appid=551afb494d45ea0dbed796d9c6efc0e6';
+//Récupération de la température et maj du site
+function temperature(id,dest){
+	//Crée la requète a l'api openweathermap
+	var xhttp = new XMLHttpRequest;
+		let request='http://api.openweathermap.org/data/2.5/weather?q='+dest+'&appid=551afb494d45ea0dbed796d9c6efc0e6';
 		xhttp.open("GET",request,true);
 
+		//Setting de la fonction callback
 		xhttp.onload=function()
 		{
 			let response=JSON.parse(xhttp.response);
-			console.info(response);
 			tmp=Math.floor(response.main.temp-273.15);
-			id=response.name
-			let x=Document.getElementById(id);
-			x.innerHTML.replace(/{{temp}}/g, tmp)
-			console.info("id : "+id)
+			document.getElementById(id).innerHTML+= " "+tmp +"°C";
 		}
 		xhttp.send();
-
-	};
 }
 
 //Fonction pour le chargement de la page réservation
@@ -142,22 +142,18 @@ function chargementPageReservation()
 			newContent = clone.firstElementChild.innerHTML
 				.replace(/{{ListeVille}}/g, listeDestination)
 			clone.firstElementChild.innerHTML = newContent;
-			document.getElementById('containerReservationWithoutId').appendChild(clone);		
-			
+			document.getElementById('containerReservationWithoutId').appendChild(clone);
 	}
-
 }
 
 function chargementPageRecapitulatif()
 {
 	console.log("yes");
-
 }
 
 function recapitulatif(name, ursname)
 {
 	window.location.assign("http://127.0.0.1:5500/recapitulatif.html?name="+name+"/ursname="+ursname);
-	
 	console.log(recap);
 }
 
