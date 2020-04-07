@@ -29,6 +29,7 @@ header h1
   font-weight:bold;
   z-index: 4;
   margin-left:4%;
+  width:35%;
 }
 
 header img
@@ -194,14 +195,160 @@ MENU DE NAVIGATION
   }
   nav ul li ul a:hover
   {
-    color:#4dc3ff;
+    color:#09c9bf;
+  }
+/*//////////////////////////////////////////////////////////////
+PAGE RESERVERTION
+ //////////////////////////////////////////////////////////////*/
+label{
+  width:15vw;
+  height:1vh;
+  display: inline-block;
+  text-align:right;
+  margin-left:-10%;
+}
+.NbP{
+  width:15vw;
+  height:1vh;
+  display: inline-block;
+  text-align:right;
+  margin-left:-1vw;
+}
+
+.descriptionDest{
+  width:80vw;
+  margin-left:10vw;
+  text-align:center;
+  font-size:1.2em;
+  padding:2vh;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+  input[type=text]  {
+    width: 15vw;
+    padding: 0.8vh 0.8vh;
+    margin: 0.8vh 0;
+    height:4vh;
+    box-sizing: border-box;
+    margin-left:2%;
   }
 
 
+  input[type=tel]  {
+    width: 15vw;
+    padding: 0.8vh 0.8vh;
+    margin: 0.8vh 0;
+    height:4vh;
+    box-sizing: border-box;
+    margin-left:2%;
+
+  }
+
+  input[type=checkbox]  {
+    width: 15vw;
+    padding: 0.8vh 0.8vh;
+    margin: 0.8vh 0;
+    height:4vh;
+    box-sizing: border-box;
+    margin-left:2%;
+
+  }
+
+  input[type=date]  {
+    width: 15vw;
+    padding: 0.8vh 0.8vh;
+    margin: 0.8vh 0;
+    height:4vh;
+    box-sizing: border-box;
+    margin-left:2%;
+
+  }
+  input[type=number]  {
+    width: 5vw;
+     padding: 0.8vh 0.8vh;
+    margin: 0.8vh 0;
+    height:4vh;
+    margin-right:15vw;
+    box-sizing: border-box;
+    margin-left:2%;
+  }
+
+.sousTitreResa{
+  text-align: left;
+  margin-left:5%;
+  height:3vh;
+  color:#74cfcc;
+  border-bottom: #99a3a3 2px solid;
+  margin-right:10%;
+}
+.validFormButton{
+  height:5vh;
+  width:10vw;
+  font-size:1.4em;
+  margin-top:2vh;
+  margin-left:45%;
+}
+
+
+/*//////////////////////////////////////////////////////////////
+PAGE RECAPITULATIF
+ //////////////////////////////////////////////////////////////*/
+#recapitulatif{
+  background-color: white;
+  width:80%;
+  margin-left:10%;
+}
+
+ .recapTitle
+{
+  color:#289c96;
+  text-align: center;
+  font-size: 1.5em;
+  margin-top:5vh;
+  padding:8vh;
+  height:20vh;
+}
+
+.recapNumResa{
+  font-weight: bold;
+  width:20%;
+  height:5vh;
+  margin-left:80%;
+  margin-top:-30vh;
+  
+}
+
+.sousTitreRecap{
+  text-align: left;
+  height:3vh;
+  color:#74cfcc;
+  border-bottom: #99a3a3 2px solid;
+}
+
+.infoPersonnelle
+{
+  height:20vh;
+  width:86%;
+  margin-left:7%;
+}
+.infoVoyage
+{
+  height:30vh;
+  width:86%;
+  margin-left:7%;
+  margin-bottom:15vh;
+}
 /*OTHER*/
 
 body{
   /*background-color:white;*/
   background-image:url('images/test.jpg'); 
   background-size: repeat;
+}
+
+section h2{
+  color:#289c96;
+  text-align: center;
+  font-size: 1.9em;
+
 }
