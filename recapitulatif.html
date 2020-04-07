@@ -10,9 +10,27 @@
 		<body onload="initLoad()">
 	<header ></header>
 
-	<section>
-		<!--
--->
+	<section id="recapitulatif">
+		<template id="templateRecapitulatif">
+			<article>
+				<h2 class="recapTitle" >Récapitulatif pour voyage à {{villeName}}</h2>
+				<div class="recapNumResa" >Numéro réservation #{{numeroReservation}}</div>
+				<aside class="infoPersonnelle">	
+					<h3 class="sousTitreRecap">Information personnelles</h3>
+					<div>Nom : {{name}}</div>
+					<div>Prenom : {{username}}</div>
+					<div>Email : {{email}}</div>
+					<div>Télephone : {{phone}}</div>
+				</aside>
+				<aside class="infoVoyage">
+					<h3 class="sousTitreRecap" >Information sur le voyage</h3>
+					<div> Du {{dateDepart}} à {{dateRetour}}</div>
+					<div>{{nbAdulte}} adulte et {{nbEnfant}} enfant</div>
+					<div>Petit dej {{petitDej}}</div>
+					<div>Infos complémentaire :{{infosCompl}}</div>
+				</aside>
+			</article>
+		</template>
 	</section>
 
 	<footer></footer>
