@@ -119,13 +119,10 @@ function chargementPageReservation()
 				laDestinationChoisi=v;
 				let cloneId = document.importNode(templateWithId.content, true);   
 				newContent = cloneId.firstElementChild.innerHTML	
-        
-        
-
 					.replace(/{{villeId}}/g, v.destination)
 					.replace(/{{Description}}/g, v.description);
 				cloneId.firstElementChild.innerHTML = newContent;
-				document.getElementById('containerReservationWithId').appendChild(cloneId);	
+				document.getElementById('containerReservation').appendChild(cloneId);	
 				let image=document.getElementById('imageDest');
 				image.style.backgroundImage=v.imageRes;
 				image.style.backgroundSize="cover";
@@ -144,14 +141,8 @@ function chargementPageReservation()
 	//Ouverture de la page sans choix initial la liste
 	if(idReservation==undefined )
 	{
-		//Récupération des template
-		let templateTitle = document.querySelector("#TitleReservation");
+		//Récupération du template
 		let templateWithoutId = document.querySelector("#templateReservationWithoutId");
-
-		//Mise a jour titre
-		let cloneTitle = document.importNode(templateTitle.content, true);   
-		document.getElementById('containerReservationWithoutId').appendChild(cloneTitle);	
-
 
 		//Récupération des destionation
 		var listeDestination="<FORM> <SELECT id='listeVille' name='dest' size='1''>";
@@ -164,7 +155,7 @@ function chargementPageReservation()
 			newContent = clone.firstElementChild.innerHTML
 				.replace(/{{ListeVille}}/g, listeDestination)
 			clone.firstElementChild.innerHTML = newContent;
-			document.getElementById('containerReservationWithoutId').appendChild(clone);		
+			document.getElementById('containerReservation').appendChild(clone);		
 	}
 }
 
@@ -283,7 +274,7 @@ function validForm()
 		{
 			var nbJ=dateDiff(dD,dR);
 			//Vérication date cohérente
-			if(nbJ<0)
+			if(nbJ.day<0)
 			{
 				errorZone.innerHTML="La date de retour doit être supérieur à celle d'arrivée";
 				errorZone.style.visibility="visible";
@@ -312,7 +303,7 @@ s
 					sessionStorage.setItem("nbEnfant",nbEnfant); 
 					sessionStorage.setItem("petitDej",petitDej); 	
 					sessionStorage.setItem("infoComple",infoComple); 
-					recapitulatif(numeroRes);
+					//recapitulatif(numeroRes);
 				}
 			}
 		}
