@@ -96,7 +96,6 @@ function temperature(id,dest){
 		{
 			let response=JSON.parse(xhttp.response);
 			tmp=Math.floor(response.main.temp-273.15);
-			document.getElementById(id).innerHTML+= " "+tmp +"°C";
 		}
 		xhttp.send();
 }
