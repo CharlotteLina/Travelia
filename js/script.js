@@ -5,7 +5,7 @@ var laDestinationChoisi=[];
 //Modèle pour l'en tête
 function htmlHeader()
 {
-	return 	 '<img src="css/images/test.png">'+
+	return 	 '<img src="css/images/logo.png">'+
 			 '<h1>Travelia</h1>'+
 			 '<nav> <ul> '+
              '<li><a href="/index.html">Accueil</a></li>'+
@@ -112,8 +112,7 @@ function chargementPageReservation()
 				
 				//On conserve les prix 
 				sessionStorage.setItem("prixVoyage",v.prixVoyage); 
-				sessionStorage.setItem("prixAdulte",v.prixAdulte); 
-				sessionStorage.setItem("prixEnfant",v.prixEnfant); 
+				sessionStorage.setItem("prixHotel",v.prixHotel); 
 
 
 
@@ -285,11 +284,10 @@ function calculerPrix()
 			console.log(prixPetitDej)
 			//On récupère les variables nécessaires
 			var prixVoyage=sessionStorage.getItem("prixVoyage"); 
-			var prixAdulte=sessionStorage.getItem("prixAdulte"); 
-			var prixEnfant=sessionStorage.getItem("prixEnfant"); 
+			var prixHotel=sessionStorage.getItem("prixHotel"); 
 
 			var PrixVol=((nbE+nbA)*prixVoyage);
-			var PrixHotel=(nbA*prixAdulte*nbJ.day)+(nbE*prixEnfant*nbJ.day)+((nbE+nbA)*nbJ.day*prixPetitDej);
+			var PrixHotel=(nbA*prixHotel*nbJ.day)+(nbE*(prixHotel*0.4)*nbJ.day)+((nbE+nbA)*nbJ.day*prixPetitDej);
 			var PrixTotal=PrixVol+PrixHotel;
 			console.log(PrixTotal);
 
