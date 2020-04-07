@@ -167,6 +167,7 @@ function chargementPageRecapitulatif()
 	var petitDej = sessionStorage.getItem("petitDej"); 
 	var infoComple = sessionStorage.getItem("infoComple");
 
+
 	//Récupération des template
 	let templateRecap = document.querySelector("#templateRecapitulatif");
 
@@ -223,13 +224,30 @@ function validForm()
 	var infoComple = document.getElementById("infoComple").value;
 
 
+	if(nameValue==null||nameValue=="")
+	{
+		console.log("Il faut un nom");
+	}
+	else
+	{
+		if(usernameValue==null||usernameValue=="")
+		{
+			console.log("Il faut un nom");
+		}
+		else
+		{
+			
+		}
+	}
 	//FAIRE TOUT LES TESTS POUR CHAQUE CHAMPS AVANT LE RESTE
 
 	//On créer le numéro de reservation
 	var numeroRes=Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
 
+
 	sessionStorage.setItem("numeroReservation",numeroRes); 
 	sessionStorage.setItem("name",nameValue); 
+	sessionStorage.setItem("username",usernameValue); 
 	sessionStorage.setItem("email",email); 
 	sessionStorage.setItem("phone",phone); 
 	sessionStorage.setItem("dateD",dateD); 	
@@ -298,7 +316,7 @@ function calculerPrix()
 	}
 	else
 	{
-		//mettre le prix à 0
+		//mettre le prix a 0
 	}
 }
 
