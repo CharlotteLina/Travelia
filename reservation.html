@@ -12,27 +12,78 @@
 	<header ></header>
 
 	<section>
-		<h2>Réservations</h2>
+
 
 		<!--Chargement de la page avec un pays choisi-->
 		<div id="containerReservationWithId"></div>
+		
 			<template id="templateReservationWithId">
-				<h2>pour {{villeId}}</h2>
+				<div>
+					<h2 >Réservations pour {{villeId}}</h2>
+					<p class="descriptionDest">{{Description}}</p>
+				</div>	
+					<form method="post" class="formulaire" style="margin-left:4vw;width:60vw; border: #b7bdbc solid 1px;height:90vh;background-color: white;text-align:center; display:inline-block;">
+							<h3 class="sousTitreResa">Quand voulez vous partir ? </h3>
 
-						<form  method="post" class="form-example">
-							<div class="form-example">
-							  <label for="name">Enter your name: </label>
+						<div id="dateD">
+							<label for="dateDepart">Date de départ: </label>
+							<input type="date" name="dateDepart" id="dateDepart" placeholder="Date de départ" onchange="calculerPrix()" required>	
+						</div>
+						<div id="dateA">
+							<label for="dateRetour">Date de retour: </label>
+							<input type="date" name="dateRetour" id="dateRetour" placeholder="Date d'arrivee" onchange="calculerPrix()" required>	
+						</div>
+						<div id="nbPartiA">
+							<label class="NbP" for="nbAdulte">Nombre d'adultes </label>
+							<input type="number" name="nbAdulte" id="nbAdulte" value=0 min="0" max="100" onchange="calculerPrix()"  required>
+						</div>
+						<div id="nbPartiE">
+							<label class="NbP"  for="nbEnfant">Nombre d'enfants </label>
+							<input type="number" name="nbEnfant" id="nbEnfant" value=0 min="0" max="100" onchange="calculerPrix()"  required>
+						</div>
+						<div id="petitDejeuner">
+							<label class="PtitDej" for="petitDej">Petit déjeuner ? </label>
+							<input type="checkbox" name="petitDej" id="petitDej" onchange="calculerPrix()" >
+						</div>
+						<div id="InfosComple" >
+							<label for="infoComple">Infos complementaire</label>
+							<input type="text" cols="40" rows="5" style="width:15vw; height:5vh;" name="infoComple" id="infoComple" required>
+						</div>
+						<h3 class="sousTitreResa">Qui êtes vous ?</h3>
+
+						<div id="Name">
+							  <label class="InfoPerso" for="name">Name: </label>
 							  <input type="text" name="name" id="name" required>
-							</div>
-							<div class="form-example">
-							</div>
-						</form>
-						<button onclick="validForm()">Valider</button>
+						</div>
+						<div id="Ursname">
+							  <label class="InfoPerso" for="username">Ursname: </label>
+							  <input type="text" name="username" id="username" required>
+						</div>
+						<div id="Email">
+							  <label class="InfoPerso" for="email">Email: </label>
+							  <input type="text" name="email" id="email" required>
+						</div>
+						<div id="Phone">
+							  <label class="InfoPerso" for="phone">Phone </label>
+							  <input type="tel" name="phone" id="phone" required>	
+						</div>
 
+						<div  style="font-size:1.2em;background-color:#c0f0ed; border:#ccd9d8 1px solid; width:10vw;height:5vh;margin-top:4vh;margin-left:25vw;padding:1.2vh;">Prix :
+							<div id="thePrice" >0€</div>
+						</div>
+					</form>
+					<div id="imageDest" style="border: #b7bdbc solid 1px; margin-right:4vw;width:30vw; height:90vh; background-color:black; float:right;" ></div>
+
+					<button class="validFormButton" onclick="validForm()">Valider</button>
+					</div>
 			</template>
+
 
 		<!--Chargement de la page avec un pays choisi-->
 		<div id="containerReservationWithoutId">
+			<template id="TitleReservation">
+				<h2>Réservations </h2>
+			</template>
 			<template id="templateReservationWithoutId">
 
 					<div>	{{ListeVille}} </div>	
