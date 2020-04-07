@@ -346,9 +346,58 @@ body{
   background-size: repeat;
 }
 
+
 section h2{
   color:#289c96;
   text-align: center;
   font-size: 1.9em;
 
+}
+
+
+
+/*//////////////////////////////////////////////////////////////
+Page de contact
+ //////////////////////////////////////////////////////////////*/
+.grid-item {
+	background-color: rgba(255, 255, 255, 0.8);
+	border: 1px solid rgba(0, 0, 0, 0.8);
+	padding: 20px;
+	font-size: 30px;
+	text-align: center;
+}
+
+.container-contact:nth-child(even) {
+	width: 80%;
+	height: auto;
+	margin: 0 auto;
+	padding: 20px;
+	background: #f0f0ef;
+	text-align: center;
+	padding-top: 5em;
+}
+.container-contact:nth-child(odd) {
+	width: 80%;
+	height: auto;
+	margin: 0 auto;
+	padding: 20px;
+	background: white;
+	text-align: center;
+	padding-top: 5em;
+}
+.contact {
+	display: inline-block;
+	justify-items: auto;
+	padding-left: 4em;
+	padding-right: 4em;
+}
+
+.photo {
+	width: 130px;
+	height: 150px;
+}
+
+.icon {
+	width: 100px;
+	height: 100px;
 }

@@ -80,8 +80,27 @@ function chargementPageIndex()
 			.replace(/{{monId}}/g, v.id);	
 		clone.firstElementChild.innerHTML = newContent;
 		clone.firstElementChild.style.backgroundImage=v.image;
-		document.getElementById('containeVoyage').appendChild(clone);			
+		document.getElementById('containeVoyage').appendChild(clone);
+		
+		temperature(v.id,v.destination);
 	};
+}
+
+//Récupération de la température et maj du site
+function temperature(id,dest){
+	//Crée la requète a l'api openweathermap
+	var xhttp = new XMLHttpRequest;
+		let request='http://api.openweathermap.org/data/2.5/weather?q='+dest+'&appid=551afb494d45ea0dbed796d9c6efc0e6';
+		xhttp.open("GET",request,true);
+
+		//Setting de la fonction callback
+		xhttp.onload=function()
+		{
+			let response=JSON.parse(xhttp.response);
+			tmp=Math.floor(response.main.temp-273.15);
+			document.getElementById(id).innerHTML+= " "+tmp +"°C";
+		}
+		xhttp.send();
 }
 
 //Fonction pour le chargement de la page réservation
@@ -101,6 +120,9 @@ function chargementPageReservation()
 				laDestinationChoisi=v;
 				let cloneId = document.importNode(templateWithId.content, true);   
 				newContent = cloneId.firstElementChild.innerHTML	
+        
+        
+
 					.replace(/{{villeId}}/g, v.destination)
 					.replace(/{{Description}}/g, v.description);
 				cloneId.firstElementChild.innerHTML = newContent;
@@ -144,14 +166,11 @@ function chargementPageReservation()
 				.replace(/{{ListeVille}}/g, listeDestination)
 			clone.firstElementChild.innerHTML = newContent;
 			document.getElementById('containerReservationWithoutId').appendChild(clone);		
-
 	}
-
 }
 
 function chargementPageRecapitulatif()
 {
-
 	//On récupère le valeur selectionné
 	var ville = sessionStorage.getItem("ville"); 
 	var numRes = sessionStorage.getItem("numeroReservation"); 
@@ -190,15 +209,12 @@ function chargementPageRecapitulatif()
 	cloneRecap.firstElementChild.innerHTML = newContent;
 	console.log(newContent);
 	document.getElementById('recapitulatif').appendChild(cloneRecap);
-
-
 }
 
 function recapitulatif(numeroRes)
 {
 	//AJOUTER ID RESERVATION
 	window.location.assign("http://127.0.0.1:5500/recapitulatif.html?id+"+numeroRes);
-
 }
 
 //Lien pour la réservation
