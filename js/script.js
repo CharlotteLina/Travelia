@@ -2,6 +2,10 @@ var lesDestinations=[];
 var url=window.location.href;
 var laDestinationChoisi=[];
 
+////////////////////////////
+///FONCTIONS GENERALES ///
+////////////////////////////
+
 //Modèle pour l'en tête
 function htmlHeader()
 {
@@ -13,14 +17,12 @@ function htmlHeader()
              '<li><a href="contact.html">A propos & Contact</a></li>'+
              '</ul> </nav> '
 }
-
 //Modèle pour le pied de page
 function htmlFooter()
 {
 	return 	 '<p>© Copyright 2019-2020 Fourel-Gauthier- Tous droits réservés</p>'
 }
-
-
+//Fonction pour le chargement de toute les pages
 function initLoad()
 {
 
@@ -29,6 +31,7 @@ function initLoad()
 	document.querySelector('footer').innerHTML +=htmlFooter();
 
 	//Preparation pour le chargement des différentes pages
+	var url=window.location.href;
 	let testHome=url.indexOf("index");
 	let testReservation=url.indexOf("reservation");
 	let testRecapitulatif=url.indexOf("recapitulatif");
@@ -55,18 +58,75 @@ function initLoad()
 			chargementPageRecapitulatif()
 
 		}
-		
-		//Chargement de la page à propos & contact
-		if(testAproposContact!=-1)
-		{
-
-		}
 	});
-
-
 	
 }
 
+//Calcule du nombre de jour
+function dateDiff(date1, date2){
+    var diff = {}                           // Initialisation du retour
+    var tmp = date2 - date1;
+ 
+    tmp = Math.floor(tmp/1000);             // Nombre de secondes entre les 2 dates
+    diff.sec = tmp % 60;                    // Extraction du nombre de secondes
+
+    tmp = Math.floor((tmp-diff.sec)/60);    // Nombre de minutes (partie entière)
+    diff.min = tmp % 60;                    // Extraction du nombre de minutes
+ 
+    tmp = Math.floor((tmp-diff.min)/60);    // Nombre d'heures (entières)
+    diff.hour = tmp % 24;                   // Extraction du nombre d'heures
+     
+    tmp = Math.floor((tmp-diff.hour)/24);   // Nombre de jours restants
+    diff.day = tmp;
+     
+    return diff;
+}
+//Fonction pour récuperer parametre dans URL
+function getUrlParam() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+//Fonction pour avoir le mois écrit en toute lettre
+function getMoisDate(number)
+{
+	console.log(number);
+	switch (number) {
+		case '01':
+			return "janvier";break;
+		case '02':
+			return "février";break;		
+		case '03':
+			return "mars";break;		
+		case '04':
+			return "avril";break;		
+		case '05':
+			return "mai";break;		
+		case '06':
+			return "juin";break;		
+		case '07':
+			return "juillet";break;		
+		case '08':	
+			return "aout";break;		
+		case '09':
+			return "septembre";break;		
+		case '10':
+			return "octobre";break;	
+		case '11':
+			return "novembre";break;
+		case '12':
+			return "décembre";break;	
+		default:
+			break;
+	}
+}
+
+
+////////////////////////////
+///FONCTION POUR ACCUEIL ///
+////////////////////////////
 
 //Fonction pour le chargement de la page accueil
 function chargementPageIndex()
@@ -84,7 +144,6 @@ function chargementPageIndex()
 		temperature(v.id,v.destination);
 	};
 }
-
 //Récupération de la température et maj du site
 function temperature(id,dest){
 	//Crée la requète a l'api openweathermap
@@ -102,6 +161,21 @@ function temperature(id,dest){
 		xhttp.send();
 }
 
+////////////////////////////////
+///FONCTION POUR RESERVATION ///
+////////////////////////////////
+
+//Lien pour la réservation
+function reservation(id)
+{
+	window.location.assign("http://127.0.0.1:5500/reservation.html?id="+id);
+}
+//Lien pour réservation de l'onglet réservation
+function reserverChoose() {
+	
+	var id=document.getElementById('listeVille').value;
+	reservation(id);	
+}
 //Fonction pour le chargement de la page réservation
 function chargementPageReservation()
 {
@@ -159,7 +233,207 @@ function chargementPageReservation()
 			document.getElementById('containerReservation').appendChild(clone);		
 	}
 }
+//Fonction pour valider le formulaire
+function validForm()
+{
+	//On récupère les informations personnelles
+	var nameValue = document.getElementById("name").value;
+	var usernameValue = document.getElementById("username").value;
+	var email = document.getElementById("email").value;
+	var phone = document.getElementById("phone").value;
 
+	//On récupère les informations du voyage
+	var dateD = document.getElementById("dateDepart").value;
+	var dateR = document.getElementById("dateRetour").value;
+	var nbAdulte = document.getElementById("nbAdulte").value;
+	var nbEnfant = document.getElementById("nbEnfant").value;
+	var petitDej = document.getElementById("petitDej").checked;
+	var infoComple = document.getElementById("infoComple").value;
+
+	var errorZone=document.getElementById("errorMessage");
+
+	//Vérification informations personnelles
+	if(nameValue==null||nameValue==""||usernameValue==null||usernameValue==""||email==null||email==""||phone==null||phone=="")
+	{
+		errorZone.innerHTML="Il faut un nom,un prénom,un email et un numéro de téléphone";
+		errorZone.style.visibility="visible";
+	}
+	else
+	{
+		var resDate=ValiderDateDepart(dateD);
+		var resEmail=ValiderEmail(email);
+		var resTelephone=ValiderTelephone(phone);
+
+		if(resDate==true && resEmail==true && resTelephone ==true)
+		{
+			var dD=new Date(dateD);
+			var dR=new Date(dateR);
+			//Vérication saisie des dates
+			if(dD=="Invalid Date"||dR=="Invalid Date" )
+			{
+				errorZone.innerHTML="Il faut une date d'arrivée et de retour";
+				errorZone.style.visibility="visible";
+
+			}
+			else
+			{
+				var nbJ=dateDiff(dD,dR);
+				//Vérication date cohérente
+				if(nbJ.day<0)
+				{
+					errorZone.innerHTML="La date de retour doit être supérieur à celle d'arrivée";
+					errorZone.style.visibility="visible";
+
+				}
+				else
+				{
+					if(nbAdulte==0)
+					{
+						errorZone.innerHTML="Il faut au moins un adulte";
+						errorZone.style.visibility="visible";
+
+					}
+					else
+					{
+						//On créer le numéro de reservation
+						var numeroRes=Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+						sessionStorage.setItem("numeroReservation",numeroRes); 
+						sessionStorage.setItem("name",nameValue); 
+						sessionStorage.setItem("username",usernameValue); 
+						sessionStorage.setItem("email",email); 
+						sessionStorage.setItem("phone",phone); 
+						sessionStorage.setItem("dateD",dateD); 	
+						sessionStorage.setItem("dateR",dateR); 
+						sessionStorage.setItem("nbAdulte",nbAdulte); 	
+						sessionStorage.setItem("nbEnfant",nbEnfant); 
+						sessionStorage.setItem("petitDej",petitDej); 	
+						sessionStorage.setItem("infoComple",infoComple); 
+						recapitulatif(numeroRes);
+					}
+				}
+			}
+		}
+
+		
+	
+	}
+
+
+}
+//Fonction pour calculer le prix
+function calculerPrix()
+{
+
+	//On récupere les deux dates
+	var dD= new Date(document.getElementById("dateDepart").value);
+	var dR= new Date(document.getElementById("dateRetour").value);
+	var nbA= new Number(document.getElementById("nbAdulte").value);
+	var nbE= new Number(document.getElementById("nbEnfant").value);
+	var petitDej=document.getElementById("petitDej").checked;
+	var lePrix= document.getElementById("thePrice");
+	//Si une des dates est vide
+	if(dD!="Invalid Date"&&dR!="Invalid Date" && nbA!=0)
+ 	{
+		//On calcule de nombre de jour
+		var nbJ=dateDiff(dD,dR);
+		console.log(nbJ.day);
+		if(nbJ.day<0)
+		{
+			//AFFICHER UN MESSAGE DERREUR
+			console.log("La date de retour ne peut pas être antérieur à la date de l'aller");
+		}
+		//On a un nombre de jour positif 
+		else
+		{
+			var prixPetitDej=0;
+			console.log(petitDej);
+			if(petitDej==true)
+			prixPetitDej=12;
+
+			console.log(prixPetitDej)
+			//On récupère les variables nécessaires
+			var prixVoyage=sessionStorage.getItem("prixVoyage"); 
+			var prixHotel=sessionStorage.getItem("prixHotel"); 
+
+			var PrixVol=((nbA*prixVoyage)+(nbE*prixVoyage*0.4));
+			
+			var PrixHotel=(nbA*prixHotel*nbJ.day)+(nbE*(prixHotel*0.4)*nbJ.day)+((nbE+nbA)*nbJ.day*prixPetitDej);
+			var PrixTotal=PrixVol+PrixHotel;
+			sessionStorage.setItem("prixTotalVol",PrixVol);
+			sessionStorage.setItem("prixTotalHotel",PrixHotel);
+
+			lePrix.innerHTML=PrixTotal+"€";
+
+		}
+
+	}
+	else
+	{
+		//mettre le prix a 0
+	}
+}
+//Verifiier date de depart superieur a date aujourd'huii
+function ValiderDateDepart(dateDep)
+{
+	var errorZone=document.getElementById("errorMessage");
+	console.log("here");
+	var today = new Date();
+	var dd = String(today.getDate()).padStart(2, '0');
+	var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+	var yyyy = today.getFullYear();
+
+	console.log(dateDep);
+	var dateDepC=dateDep.split('-');
+	if(dateDepC[0]>=yyyy&&dateDepC[1]>=mm&&dateDepC[2]>=dd)
+	{
+		return true;
+	}
+	else
+	{
+		errorZone.innerHTML="Date de départ doit être supérieur à aujourd'hui";
+		errorZone.style.visibility="visible";
+		return false;
+	}
+	console.log(dateDepC);
+} 
+//Vérification téléphone
+function ValiderTelephone(phoneNum)
+{
+	var errorZone=document.getElementById("errorMessage");
+  	if(/^\d{10}$/.test(phoneNum))
+	{
+	return true;
+	}
+		errorZone.innerHTML="Numéro de téléphone invalide (Exemple : 0601020304)";
+		errorZone.style.visibility="visible";
+		return false;
+	
+}
+//Verification email
+function ValiderEmail(mail) 
+{
+	var errorZone=document.getElementById("errorMessage");
+	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+	{
+		return (true)
+	}
+	errorZone.innerHTML="Email invalide (Exemple : test@email.fr)";
+	errorZone.style.visibility="visible";
+	return (false)
+}
+
+
+//////////////////////////////////
+///FONCTION POUR RECAPITULATIF ///
+//////////////////////////////////
+
+//Lien pour le récapitulatif
+function recapitulatif(numeroRes)
+{
+	//AJOUTER ID RESERVATION
+	window.location.assign("http://127.0.0.1:5500/recapitulatif.html?id+"+numeroRes);
+}
+//Fonction pour le chargement de la page récapitulatif
 function chargementPageRecapitulatif()
 {
 	//On récupère le valeur selectionné général
@@ -275,270 +549,4 @@ function chargementPageRecapitulatif()
 	document.getElementById('recapitulatif').appendChild(cloneRecap);
 }
 
-function recapitulatif(numeroRes)
-{
-	//AJOUTER ID RESERVATION
-	window.location.assign("http://127.0.0.1:5500/recapitulatif.html?id+"+numeroRes);
-}
-//Lien pour réservation de l'onglet réservation
-function reserverChoose() {
-	
-	var id=document.getElementById('listeVille').value;
-	reservation(id);	
-}
 
-//Lien pour la réservation
-function reservation(id)
-{
-	window.location.assign("http://127.0.0.1:5500/reservation.html?id="+id);
-}
-
-
-
-function validForm()
-{
-	//On récupère les informations personnelles
-	var nameValue = document.getElementById("name").value;
-	var usernameValue = document.getElementById("username").value;
-	var email = document.getElementById("email").value;
-	var phone = document.getElementById("phone").value;
-
-	//On récupère les informations du voyage
-	var dateD = document.getElementById("dateDepart").value;
-	var dateR = document.getElementById("dateRetour").value;
-	var nbAdulte = document.getElementById("nbAdulte").value;
-	var nbEnfant = document.getElementById("nbEnfant").value;
-	var petitDej = document.getElementById("petitDej").checked;
-	var infoComple = document.getElementById("infoComple").value;
-
-	var errorZone=document.getElementById("errorMessage");
-
-	//Vérification informations personnelles
-	if(nameValue==null||nameValue==""||usernameValue==null||usernameValue==""||email==null||email==""||phone==null||phone=="")
-	{
-		errorZone.innerHTML="Il faut un nom,un prénom,un email et un numéro de téléphone";
-		errorZone.style.visibility="visible";
-	}
-	else
-	{
-		var resDate=ValiderDateDepart(dateD);
-		var resEmail=ValiderEmail(email);
-		var resTelephone=ValiderTelephone(phone);
-
-		if(resDate==true && resEmail==true && resTelephone ==true)
-		{
-			var dD=new Date(dateD);
-			var dR=new Date(dateR);
-			//Vérication saisie des dates
-			if(dD=="Invalid Date"||dR=="Invalid Date" )
-			{
-				errorZone.innerHTML="Il faut une date d'arrivée et de retour";
-				errorZone.style.visibility="visible";
-
-			}
-			else
-			{
-				var nbJ=dateDiff(dD,dR);
-				//Vérication date cohérente
-				if(nbJ.day<0)
-				{
-					errorZone.innerHTML="La date de retour doit être supérieur à celle d'arrivée";
-					errorZone.style.visibility="visible";
-
-				}
-				else
-				{
-					if(nbAdulte==0)
-					{
-						errorZone.innerHTML="Il faut au moins un adulte";
-						errorZone.style.visibility="visible";
-
-					}
-					else
-					{
-						//On créer le numéro de reservation
-						var numeroRes=Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
-						sessionStorage.setItem("numeroReservation",numeroRes); 
-						sessionStorage.setItem("name",nameValue); 
-						sessionStorage.setItem("username",usernameValue); 
-						sessionStorage.setItem("email",email); 
-						sessionStorage.setItem("phone",phone); 
-						sessionStorage.setItem("dateD",dateD); 	
-						sessionStorage.setItem("dateR",dateR); 
-						sessionStorage.setItem("nbAdulte",nbAdulte); 	
-						sessionStorage.setItem("nbEnfant",nbEnfant); 
-						sessionStorage.setItem("petitDej",petitDej); 	
-						sessionStorage.setItem("infoComple",infoComple); 
-						recapitulatif(numeroRes);
-					}
-				}
-			}
-		}
-
-		
-	
-	}
-
-
-}
-
-function getUrlParam() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
-}
-
-function calculerPrix()
-{
-
-	//On récupere les deux dates
-	var dD= new Date(document.getElementById("dateDepart").value);
-	var dR= new Date(document.getElementById("dateRetour").value);
-	var nbA= new Number(document.getElementById("nbAdulte").value);
-	var nbE= new Number(document.getElementById("nbEnfant").value);
-	var petitDej=document.getElementById("petitDej").checked;
-	var lePrix= document.getElementById("thePrice");
-	//Si une des dates est vide
-	if(dD!="Invalid Date"&&dR!="Invalid Date" && nbA!=0)
- 	{
-		//On calcule de nombre de jour
-		var nbJ=dateDiff(dD,dR);
-		console.log(nbJ.day);
-		if(nbJ.day<0)
-		{
-			//AFFICHER UN MESSAGE DERREUR
-			console.log("La date de retour ne peut pas être antérieur à la date de l'aller");
-		}
-		//On a un nombre de jour positif 
-		else
-		{
-			var prixPetitDej=0;
-			console.log(petitDej);
-			if(petitDej==true)
-			prixPetitDej=12;
-
-			console.log(prixPetitDej)
-			//On récupère les variables nécessaires
-			var prixVoyage=sessionStorage.getItem("prixVoyage"); 
-			var prixHotel=sessionStorage.getItem("prixHotel"); 
-
-			var PrixVol=((nbA*prixVoyage)+(nbE*prixVoyage*0.4));
-			
-			var PrixHotel=(nbA*prixHotel*nbJ.day)+(nbE*(prixHotel*0.4)*nbJ.day)+((nbE+nbA)*nbJ.day*prixPetitDej);
-			var PrixTotal=PrixVol+PrixHotel;
-			sessionStorage.setItem("prixTotalVol",PrixVol);
-			sessionStorage.setItem("prixTotalHotel",PrixHotel);
-
-			lePrix.innerHTML=PrixTotal+"€";
-
-		}
-
-	}
-	else
-	{
-		//mettre le prix a 0
-	}
-}
-
-
-//Calcule du nombre de jour
-function dateDiff(date1, date2){
-    var diff = {}                           // Initialisation du retour
-    var tmp = date2 - date1;
- 
-    tmp = Math.floor(tmp/1000);             // Nombre de secondes entre les 2 dates
-    diff.sec = tmp % 60;                    // Extraction du nombre de secondes
-
-    tmp = Math.floor((tmp-diff.sec)/60);    // Nombre de minutes (partie entière)
-    diff.min = tmp % 60;                    // Extraction du nombre de minutes
- 
-    tmp = Math.floor((tmp-diff.min)/60);    // Nombre d'heures (entières)
-    diff.hour = tmp % 24;                   // Extraction du nombre d'heures
-     
-    tmp = Math.floor((tmp-diff.hour)/24);   // Nombre de jours restants
-    diff.day = tmp;
-     
-    return diff;
-}
-function getMoisDate(number)
-{
-	console.log(number);
-	switch (number) {
-		case '01':
-			return "janvier";break;
-		case '02':
-			return "février";break;		
-		case '03':
-			return "mars";break;		
-		case '04':
-			return "avril";break;		
-		case '05':
-			return "mai";break;		
-		case '06':
-			return "juin";break;		
-		case '07':
-			return "juillet";break;		
-		case '08':	
-			return "aout";break;		
-		case '09':
-			return "septembre";break;		
-		case '10':
-			return "octobre";break;	
-		case '11':
-			return "novembre";break;
-		case '12':
-			return "décembre";break;	
-		default:
-			break;
-	}
-}
-//Verifiier date de depart superieur a date aujourd'huii
-function ValiderDateDepart(dateDep)
-{
-	var errorZone=document.getElementById("errorMessage");
-	console.log("here");
-	var today = new Date();
-	var dd = String(today.getDate()).padStart(2, '0');
-	var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-	var yyyy = today.getFullYear();
-
-	console.log(dateDep);
-	var dateDepC=dateDep.split('-');
-	if(dateDepC[0]>=yyyy&&dateDepC[1]>=mm&&dateDepC[2]>=dd)
-	{
-		return true;
-	}
-	else
-	{
-		errorZone.innerHTML="Date de départ doit être supérieur à aujourd'hui";
-		errorZone.style.visibility="visible";
-		return false;
-	}
-	console.log(dateDepC);
-} 
-function ValiderTelephone(phoneNum)
-{
-	var errorZone=document.getElementById("errorMessage");
-  	if(/^\d{10}$/.test(phoneNum))
-	{
-	return true;
-	}
-		errorZone.innerHTML="Numéro de téléphone invalide (Exemple : 0601020304)";
-		errorZone.style.visibility="visible";
-		return false;
-	
-}
-//Verification email
-function ValiderEmail(mail) 
-{
-	var errorZone=document.getElementById("errorMessage");
-	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-	{
-		return (true)
-	}
-	errorZone.innerHTML="Email invalide (Exemple : test@email.fr)";
-	errorZone.style.visibility="visible";
-	return (false)
-}
