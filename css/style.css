@@ -4,11 +4,10 @@
 
 
 /*//////////////////////////////////////////////////////////////
-EN TETE
+EN TETE & GENERAL
  //////////////////////////////////////////////////////////////*/
 
-header
-{
+header{
     width:90%;
     height: 20%;
     display: flex;
@@ -21,8 +20,7 @@ header
     border-bottom:#7bdbd6 5px solid;
 }
 
-header h1
-{ 	
+header h1{ 	
 	font-size: 3.6em;
 	font-family: 'indie_flowerregular', 'Trebuchet MS', serif; 
   color: #09c9bf;
@@ -32,103 +30,42 @@ header h1
   width:35%;
 }
 
-header img
-{
+header img{
     width: 20%;
     height: 22%;
     position: absolute;
     z-index:1;
-    left:3%;
-    top:-2%;
+    left:5%;
+    top:1%;
 
 }
-/*//////////////////////////////////////////////////////////////
-GRILLE DE LA PAGE DACCUEIL 
- //////////////////////////////////////////////////////////////*/
-
-
-.grid-container {
-    display: grid;
-    grid-template-columns: 31% 31% 31%;
-    grid-column-gap:3.5%;
-    grid-row-gap:5%;
-    background-color: rgba(255, 255, 255, 0);
-    padding:1.5%;
-    width: 91%;
-    margin:auto;
-    height: auto;
-  }
-  .grid-item {
-    background-color: rgba(255, 255, 255, 0.8);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    border: 2px solid #09c9bf;
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
-    height: 15vmax 80%;
-    border-radius: 5px;
-  }
-
-.grid-item:hover{
- height: 96%;
- margin-top:-6%;
-} 
-
-.grid-item:hover button{
-  height:35%;
-  margin-top:4%;
-  width:35%;
-  background-color:#09c9bf;
-  color:black;
-  font-weight: bold;
+body{
+  /*background-color:white;*/
+  background-image:url('images/test.jpg'); 
+  background-size: repeat;
 }
+section h1{
+  color:#289c96;
+  text-align: center;
+  font-size: 1.9em;
 
-
-.grid-content{
-  justify-content: baseline;
-  background-color: white;
-  opacity:0.9;
-  margin-top:42%;
-  height:37%
-}
-
-.grid-content p{
-  font-size:0.6em;
-  margin-bottom: -0.6%;
-
-}
-.grid-content span{
-  margin-right:3%;
-  color:#09c9bf;
-  font-size: 1.6em;
-}
-button{
-  font-size:0.5em;
-  background-color:#7bdbd6;
-  color:black;
-  opacity:1;
 }
 
 /*//////////////////////////////////////////////////////////////
 PIED DE PAGE
  //////////////////////////////////////////////////////////////*/
-
- footer
- {
+footer{
    text-align: center;
    font-family:'Trebuchet MS';
    color: black;
    margin-top: 35px;
    font-size: 1em;
- }
+}
 /*//////////////////////////////////////////////////////////////
 MENU DE NAVIGATION 
  //////////////////////////////////////////////////////////////*/
 
-  nav
-  {
+ nav{
     height: auto;
     font-family:'capture_itregular', Trebuchet MS, sherif;
     opacity: 0.9;
@@ -137,47 +74,39 @@ MENU DE NAVIGATION
     margin-bottom: 2%;
     margin-top:-5%;
     z-index:3;
-  }
-  nav ul
-  {
+}
+nav ul{
       list-style-type: none;
       display:flex;
       text-align: left;
-  }
-  nav li
-  { 
+}
+nav li{ 
     width: 33%;
 
-  }
-  nav a
-  {
+}
+nav a{
       font-size: 1.2em;
       display: block;
       color: #646b68;
       text-decoration: none;
-  }
-  nav a:hover
-  {
+}
+nav a:hover{
       color: #09c9bf;
-  }
-  nav ul ul 
-  {
+}
+nav ul ul {
     display: none;
     position: relative;
     padding-bottom: 15px;
     padding-left: 9px;
   
-  }
-  nav li ul
-  {
+}
+nav li ul{
     position:absolute;
-  }
-  li:hover ul li
-  {
+}
+li:hover ul li{
     float: none;
-  }
-  nav ul li:hover ul
-  {
+}
+nav ul li:hover ul{
     display: block;
     position: relative;
     padding-top: 15px;
@@ -186,33 +115,114 @@ MENU DE NAVIGATION
     opacity:0.8;
     width:40%;
     margin-left: 35%;
-  }
-  nav ul li:hover ul li
-  {
+}
+nav ul li:hover ul li{
     display: flex;
     width: 100%;
     margin-top: 5px;
-  }
-  nav ul li ul a:hover
-  {
+}
+nav ul li ul a:hover{
     color:#09c9bf;
   }
 /*//////////////////////////////////////////////////////////////
+PAGE DACCUEIL 
+ //////////////////////////////////////////////////////////////*/
+.introduction{
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+/*Grille page d'accueil*/
+.grid-container {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  grid-column-gap:4.5%;
+  grid-row-gap:7%;
+  background-color: rgba(255, 255, 255, 0);
+  padding:1.5%;
+  width: 91%;
+  margin:auto;
+  height: auto;
+}
+#containeVoyage .grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 2px solid #09c9bf;
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+  height: 15vmax 80%;
+  border-radius: 5px;
+}
+#containeVoyage .grid-item:hover{
+height: 96%;
+margin-top:-6%;
+} 
+#containeVoyage .grid-item:hover button{
+height:45%;
+margin-top:4%;
+width:35%;
+background-color:#09c9bf;
+color:black;
+font-weight: bold;
+cursor: pointer;
+}
+#containeVoyage .grid-content{
+justify-content: baseline;
+background-color: white;
+opacity:0.9;
+margin-top:42%;
+}
+#containeVoyage .grid-content p{
+font-size:0.6em;
+margin-bottom: -0.6%;
+
+}
+#containeVoyage .grid-content .destinationTitre{
+margin-right:3%;
+color:#09c9bf;
+font-size: 1.6em;
+}
+#containeVoyage button{
+font-size:0.5em;
+background-color:#7bdbd6;
+color:black;
+opacity:1;
+}
+.meteo{
+  background-color:black;
+  border-radius: 50%;
+  font-size:3vh;
+  vertical-align: center;
+  padding:1.5vh;
+  color:#09c9bf;
+  width:6vh;
+  height:6vh;
+  font-weight: bold;
+  position:relative;
+  margin-left:98%;
+}
+
+.textMeteo
+{
+  margin-left:-3vh;
+  margin-top:1vh;
+  position: absolute;
+}
+
+/*//////////////////////////////////////////////////////////////
 PAGE RESERVERTION
  //////////////////////////////////////////////////////////////*/
-label{
+
+ /*General*/
+ label{
   width:15vw;
   height:1vh;
   display: inline-block;
   text-align:right;
   margin-left:-10%;
-}
-.NbP{
-  width:15vw;
-  height:1vh;
-  display: inline-block;
-  text-align:right;
-  margin-left:-1vw;
 }
 
 .descriptionDest{
@@ -224,62 +234,98 @@ label{
   background-color: rgba(255, 255, 255, 0.7);
 }
 
-  input[type=text]  {
-    width: 15vw;
-    padding: 0.8vh 0.8vh;
-    margin: 0.8vh 0;
-    height:4vh;
-    box-sizing: border-box;
-    margin-left:2%;
-  }
+.zoneImage{
+  border: #b7bdbc solid 1px; 
+  margin-right:3vw;
+  width:30vw; 
+  height:90vh; 
+  background-color:black; float:right;
+}
 
 
-  input[type=tel]  {
-    width: 15vw;
-    padding: 0.8vh 0.8vh;
-    margin: 0.8vh 0;
-    height:4vh;
-    box-sizing: border-box;
-    margin-left:2%;
-
-  }
-
-  input[type=checkbox]  {
-    width: 15vw;
-    padding: 0.8vh 0.8vh;
-    margin: 0.8vh 0;
-    height:4vh;
-    box-sizing: border-box;
-    margin-left:2%;
-
-  }
-
-  input[type=date]  {
-    width: 15vw;
-    padding: 0.8vh 0.8vh;
-    margin: 0.8vh 0;
-    height:4vh;
-    box-sizing: border-box;
-    margin-left:2%;
-
-  }
-  input[type=number]  {
-    width: 5vw;
-     padding: 0.8vh 0.8vh;
-    margin: 0.8vh 0;
-    height:4vh;
-    margin-right:15vw;
-    box-sizing: border-box;
-    margin-left:2%;
-  }
-
+ /*le formulaire*/
+ 
+.formulaire{
+    margin-left:3vw;
+    width:58vw; 
+    border: #b7bdbc solid 1px;
+    height:90vh;
+    background-color: white;
+    text-align:center; 
+    display:inline-block; 
+}
 .sousTitreResa{
   text-align: left;
   margin-left:5%;
   height:3vh;
   color:#74cfcc;
+  font-size:2.8vh;
   border-bottom: #99a3a3 2px solid;
   margin-right:10%;
+}
+input[type=text]  {
+  width: 15vw;
+  padding: 0.8vh 0.8vh;
+  margin: 0.8vh 0;
+  height:4vh;
+  box-sizing: border-box;
+  margin-left:2%;
+}
+input[type=tel]  {
+  width: 15vw;
+  padding: 0.8vh 0.8vh;
+  margin: 0.8vh 0;
+  height:4vh;
+  box-sizing: border-box;
+  margin-left:2%;
+}
+input[type=checkbox]  {
+  width: 15vw;
+  padding: 0.8vh 0.8vh;
+  margin: 0.8vh 0;
+  height:4vh;
+  box-sizing: border-box;
+  margin-left:2%;
+}
+input[type=date]  {
+  width: 15vw;
+  padding: 0.8vh 0.8vh;
+  margin: 0.8vh 0;
+  height:4vh;
+  box-sizing: border-box;
+  margin-left:2%;
+
+}
+input[type=number]  {
+  width: 5vw;
+    padding: 0.8vh 0.8vh;
+  margin: 0.8vh 0;
+  height:4vh;
+  margin-right:15vw;
+  box-sizing: border-box;
+  margin-left:2%;
+}
+
+.nombrePassager{
+  width:15vw;
+  height:1vh;
+  display: inline-block;
+  text-align:right;
+  margin-left:-1vw;
+}
+
+
+/*Prix validation et erreur*/
+.Price{
+  font-size:2.7vh;
+  font-weight:bold;
+  background-color:#c0f0ed; 
+  border:#ccd9d8 1px solid; 
+  width:10vw;
+  height:6vh;
+  margin-top:4vh;
+  margin-left:25vw;
+  padding:1.2vh;
 }
 .validFormButton{
   height:5vh;
@@ -287,10 +333,11 @@ label{
   font-size:1.4em;
   margin-top:2vh;
   margin-left:45%;
+  background-color:#7bdbd6;
+  color:black;
+  opacity:1;
 }
-
-#errorMessage
-{
+#errorMessage{
     margin-left: 10%;
     width: 80%;
     background-color: #c4cfca;
@@ -300,23 +347,20 @@ label{
     PADDING: 1vh;
     font-weight: bold;
     visibility:hidden;
-
 }
-
+/*Page choix de la réservation */
 select
 {
   width: 50vw;
   margin-left: 25%;
   font-size: 1.5em;
 }
-
 .selectRes
 {
   text-align: center;
     font-size: 1.3em;
     font-weight: bold
 }
-
 .reserverChoose
 {
   font-size: 1.2em;
@@ -337,7 +381,7 @@ PAGE RECAPITULATIF
 {
   color:#289c96;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.8em;
   margin-top:5vh;
   padding:8vh;
   height:20vh;
@@ -349,50 +393,91 @@ PAGE RECAPITULATIF
   height:5vh;
   margin-left:80%;
   margin-top:-30vh;
+  margin-bottom:2%;
   
 }
 
 .sousTitreRecap{
   text-align: left;
-  height:3vh;
-  font-size:2.8vh;
+  height:5%;
+  font-size:1.2em;
   color:#74cfcc;
   border-bottom: #99a3a3 2px solid;
 }
 
-.infoPersonnelle
+.info
 {
-  height:20vh;
   width:86%;
   margin-left:7%;
-}
-.infoVoyage
-{
-  height:30vh;
-  width:86%;
-  margin-left:7%;
-  margin-bottom:15vh;
-}
-/*OTHER*/
-
-body{
-  /*background-color:white;*/
-  background-image:url('images/test.jpg'); 
-  background-size: repeat;
+  padding-bottom:3%;
 }
 
+.elementPerso{
+  display: inline-block;
+  width:48%;
+  font-size:1em;
+  font-weight: bold;
+  margin-bottom:1%;
+}
+.elementPerso span{
+  font-size:1.3em;
+  font-weight: normal;
+  margin-left:1%;
+}
 
-section h1{
-  color:#289c96;
+.elementVoyage{
+  font-size:1.2em;
   text-align: center;
-  font-size: 1.9em;
-
+}
+.elementDestination{
+  margin-top:2%;
+  font-style: italic;
+  text-align: center;
+}
+.elementAutre{
+  font-size:1em;
+  margin-top:2%;
+  text-align:right;
 }
 
+.elementPrix{
+  display: inline-block;
+  width:48%;
+}
+
+table {
+  border-collapse: collapse;
+  width: 90%;
+  }
+table tr:nth-child(odd) {
+  background-color: #ddf0ed; 
+}
+table tr
+{
+  background-color: #b3e6e0;
+}
+  th {
+  width:  18%;
+  padding: 5px;
+  font-weight: normal;
+  font-size: 1.1em;
+  background-color: white;
+  }
+  td {
+  border-left: thin solid #09c9bf;
+  width: 18%;
+  padding: 5px;
+  text-align: center;
+  }
+  .PrixTotal{
+    font-size:1.5em;
+    text-align: right;
+    margin-top: 3vh;
+  }
 
 
 /*//////////////////////////////////////////////////////////////
-Page de contact
+PAGE DE CONTACT
  //////////////////////////////////////////////////////////////*/
 .grid-item {
 	background-color: rgba(255, 255, 255, 0.8);

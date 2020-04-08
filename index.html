@@ -12,15 +12,18 @@
 
 	<section>
 		<h1>Bienvenue sur Travelia</h1>
-		<p>Choissisez une destination pour enfin aller au bout de vos rêves</p>
+		<p class="introduction">Choissisez une destination pour enfin aller au bout de vos rêves</p>
 		<div class="grid-container" id="containeVoyage">
 		<template id="templateVoyage">
 				<div class="grid-item">
+					<div class="meteo"><span class="textMeteo" id={{monId}}></span></div>
+
 					<div class="grid-content">
-					<p id={{monId}}><span>{{destination}}</span>A partir de {{prix}} € </p>
+					<p><span class="destinationTitre">{{destination}}</span>A partir de {{prix}} € </p>
 					<button onclick="reservation('{{monId}}')">Réserver</button>
 					</div>
 				</div>
+
 		</template>
 		</div>
 	</section>
