@@ -26,13 +26,13 @@ function htmlHeader()
 function htmlFooter()
 {
 	var mybutton = document.getElementById("myBtn");
-	window.onscroll = function() {scrollFunction()};
+	//window.onscroll = function() {scrollFunction()};
 
 	return 	`<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 			<p>© Copyright 2019-2020 Fourel-Gauthier- Tous droits réservés</p>`
 }
 //Fonction pour le chargement de toute les pages
-function scrollFunction() {
+ /*function scrollFunction() {
 	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 	  mybutton.style.display = "block";
 	} else {
@@ -43,7 +43,8 @@ function scrollFunction() {
   function topFunction() {
 	document.body.scrollTop = 0;
 	document.documentElement.scrollTop = 0;
-  }
+  } */
+ 
 
 function initLoad()
 {
@@ -216,6 +217,8 @@ function temperature(id,dest){
 		{
 			let response=JSON.parse(xhttp.response);
 			tmp=Math.floor(response.main.temp-273.15);
+			document.getElementById(id).innerHTML+= " "+tmp +"°C";
+
 		}
 		xhttp.send();
 }
