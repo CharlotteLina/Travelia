@@ -539,7 +539,7 @@ PAGE DE CONTACT
 	width: 80%;
 	height: auto;
 	margin: 0 auto;
-	padding: 20px;
+	padding: 2vh;
 	background: #f0f0ef;
 	text-align: center;
 	padding-top: 5em;
@@ -548,7 +548,7 @@ PAGE DE CONTACT
 	width: 80%;
 	height: auto;
 	margin: 0 auto;
-	padding: 20px;
+	padding: 2vh;;
 	background: white;
 	text-align: center;
 	padding-top: 5em;
@@ -562,9 +562,15 @@ PAGE DE CONTACT
 
 .photo {
 	width: 130px;
-	height: 150px;
-}
+height:auto;}
 
+.imageTogether{
+  width:15vw;
+  height:auto;
+  position:absolute;
+  margin-top:-20vh;
+  margin-left:180vh;
+}
 .icon {
 	width: 100px;
 	height: 100px;
