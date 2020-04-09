@@ -4,6 +4,9 @@ var laDestinationChoisi=[];
 
 var prixMin=0;
 var prixMax=2000;
+var continent="tous";
+var optAnimaux=false;
+var optWifi=false;
 ////////////////////////////
 ///FONCTIONS GENERALES ///
 ////////////////////////////
@@ -80,68 +83,6 @@ function initLoad()
 	
 }
 
-//Calcule du nombre de jour
-function dateDiff(date1, date2){
-    var diff = {}                           // Initialisation du retour
-    var tmp = date2 - date1;
- 
-    tmp = Math.floor(tmp/1000);             // Nombre de secondes entre les 2 dates
-    diff.sec = tmp % 60;                    // Extraction du nombre de secondes
-
-    tmp = Math.floor((tmp-diff.sec)/60);    // Nombre de minutes (partie entière)
-    diff.min = tmp % 60;                    // Extraction du nombre de minutes
- 
-    tmp = Math.floor((tmp-diff.min)/60);    // Nombre d'heures (entières)
-    diff.hour = tmp % 24;                   // Extraction du nombre d'heures
-     
-    tmp = Math.floor((tmp-diff.hour)/24);   // Nombre de jours restants
-    diff.day = tmp;
-     
-    return diff;
-}
-//Fonction pour récuperer parametre dans URL
-function getUrlParam() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
-}
-//Fonction pour avoir le mois écrit en toute lettre
-function getMoisDate(number)
-{
-	console.log(number);
-	switch (number) {
-		case '01':
-			return "janvier";break;
-		case '02':
-			return "février";break;		
-		case '03':
-			return "mars";break;		
-		case '04':
-			return "avril";break;		
-		case '05':
-			return "mai";break;		
-		case '06':
-			return "juin";break;		
-		case '07':
-			return "juillet";break;		
-		case '08':	
-			return "aout";break;		
-		case '09':
-			return "septembre";break;		
-		case '10':
-			return "octobre";break;	
-		case '11':
-			return "novembre";break;
-		case '12':
-			return "décembre";break;	
-		default:
-			break;
-	}
-}
-
-
 ////////////////////////////
 ///FONCTION POUR ACCUEIL ///
 ////////////////////////////
@@ -176,38 +117,52 @@ function changementDestination()
 		$( "#"+v.ShortName ).remove();
 
 	}
-	console.log(prixMin);
-	console.log(prixMax);
+	continent=document.getElementById('continent-select').value;
+
 
 	for (var v of lesDestinations) {
 		//trie en fonction du prix
 		if(v.prixVoyage>=prixMin&&v.prixVoyage<=prixMax)
 		{
-			let clone = document.importNode(template.content, true);   
-			newContent = clone.firstElementChild.innerHTML	
-			.replace(/{{destination}}/g, v.destination)		
-			.replace(/{{prix}}/g, v.prixVoyage)
-			.replace(/{{monId}}/g, v.id);	
-		
-		clone.firstElementChild.innerHTML = newContent;
-		clone.firstElementChild.style.backgroundImage=v.image;
-		clone.firstElementChild.id=v.ShortName;
-		document.getElementById('containeVoyage').appendChild(clone);
-		temperature(v.id,v.destination);
+			if(continent=="tous"||continent==v.continent)
+			{
+				if(optAnimaux==false||optAnimaux==v.animaux)
+				{
+					if(optWifi==false||optWifi==v.wifi)
+					{
+						let clone = document.importNode(template.content, true);   
+						newContent = clone.firstElementChild.innerHTML	
+						.replace(/{{destination}}/g, v.destination)		
+						.replace(/{{prix}}/g, v.prixVoyage)
+						.replace(/{{monId}}/g, v.id);	
+						clone.firstElementChild.innerHTML = newContent;
+						clone.firstElementChild.style.backgroundImage=v.image;
+						clone.firstElementChild.id=v.ShortName;
+						document.getElementById('containeVoyage').appendChild(clone);
+						temperature(v.id,v.destination);
+					}
+				}
+			}
 		}
 	};
 
 }
-function mouseup(event,ui)
-{
-	console.log("here");
+
+function animauxChange(){
+
+	optAnimaux=document.getElementById("optAnimaux").checked;
+	changementDestination();
+}
+function wifiChange(){
+
+	optWifi=document.getElementById("optWiFi").checked;
 	changementDestination();
 }
 
-
+//Fonction pour le slidder
 function slidderFunction(){
 	$( function () {
-$( "#slider-range" ).slider({
+		$( "#slider-range" ).slider({
   range: true,
   min: 0,
   max: 1500,
@@ -218,7 +173,7 @@ $( "#slider-range" ).slider({
 	prixMax=ui.values[1];
 	prixMin=ui.values[0];
   }
-});
+		});
 	$( "#amount" ).val( prixMin + " € - "+ prixMax +" €");
 	console.log("lesDestination") 
 } );
@@ -235,7 +190,6 @@ if( slide1 > slide2 ){ var tmp = slide2; slide2 = slide1; slide1 = tmp; }
 var displayElement = parent.getElementsByClassName("rangeValues")[0];
 	displayElement.innerHTML = "$ " + slide1 + "k - $" + slide2 + "k";
 }
-
 window.onload = function(){
 // Initialize Sliders
 var sliderSections = document.getElementsByClassName("range-slider");
@@ -653,5 +607,72 @@ function chargementPageRecapitulatif()
 	cloneRecap.firstElementChild.innerHTML = newContent;
 	document.getElementById('recapitulatif').appendChild(cloneRecap);
 }
+
+////////////////////////////
+///FONCTION COMPLEMENTAIRES ///
+////////////////////////////
+
+//Calcule du nombre de jour
+function dateDiff(date1, date2){
+    var diff = {}                           // Initialisation du retour
+    var tmp = date2 - date1;
+ 
+    tmp = Math.floor(tmp/1000);             // Nombre de secondes entre les 2 dates
+    diff.sec = tmp % 60;                    // Extraction du nombre de secondes
+
+    tmp = Math.floor((tmp-diff.sec)/60);    // Nombre de minutes (partie entière)
+    diff.min = tmp % 60;                    // Extraction du nombre de minutes
+ 
+    tmp = Math.floor((tmp-diff.min)/60);    // Nombre d'heures (entières)
+    diff.hour = tmp % 24;                   // Extraction du nombre d'heures
+     
+    tmp = Math.floor((tmp-diff.hour)/24);   // Nombre de jours restants
+    diff.day = tmp;
+     
+    return diff;
+}
+//Fonction pour récuperer parametre dans URL
+function getUrlParam() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+//Fonction pour avoir le mois écrit en toute lettre
+function getMoisDate(number)
+{
+	console.log(number);
+	switch (number) {
+		case '01':
+			return "janvier";break;
+		case '02':
+			return "février";break;		
+		case '03':
+			return "mars";break;		
+		case '04':
+			return "avril";break;		
+		case '05':
+			return "mai";break;		
+		case '06':
+			return "juin";break;		
+		case '07':
+			return "juillet";break;		
+		case '08':	
+			return "aout";break;		
+		case '09':
+			return "septembre";break;		
+		case '10':
+			return "octobre";break;	
+		case '11':
+			return "novembre";break;
+		case '12':
+			return "décembre";break;	
+		default:
+			break;
+	}
+}
+
+
 
 
