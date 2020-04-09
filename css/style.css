@@ -211,7 +211,54 @@ opacity:1;
   margin-top:1vh;
   position: absolute;
 }
+.zoneFiltre{
+  width:90%;
+  margin-left:5%;
+  height:25vh;
+}
 
+
+.zoneFiltre h3{
+  font-size:0.9em;
+  height:5vh;
+  margin:0;
+  text-align: center;
+}
+.filtreContinent{
+  width:30%;
+  margin-left:4%;
+  height:20vh;
+  background-color:white;
+  border:2px solid grey;
+}
+.filtreOption{
+  margin-top:-20.5vh;
+  width:30%;
+  margin-left:66%;
+  height:20vh;
+  background-color:white;
+  border:2px solid grey;
+}
+
+.filtreContinent select{
+  width:40vh;
+  font-size:1em;
+  margin-left:15%;
+}
+.filtrePrix
+{
+  margin-top:-20.5vh;
+  width:30%;
+  margin-left:35%;
+  height:20vh;
+  text-align: center;
+  background-color:white;
+  border:2px solid grey;
+}
+.optionFiltre{
+  
+margin-left: 10%;
+}
 /*//////////////////////////////////////////////////////////////
 PAGE RESERVERTION
  //////////////////////////////////////////////////////////////*/
@@ -263,7 +310,7 @@ PAGE RESERVERTION
   border-bottom: #99a3a3 2px solid;
   margin-right:10%;
 }
-input[type=text]  {
+.formulaire input[type=text]  {
   width: 15vw;
   padding: 0.8vh 0.8vh;
   margin: 0.8vh 0;
@@ -271,7 +318,7 @@ input[type=text]  {
   box-sizing: border-box;
   margin-left:2%;
 }
-input[type=tel]  {
+.formulaire input[type=tel]  {
   width: 15vw;
   padding: 0.8vh 0.8vh;
   margin: 0.8vh 0;
@@ -279,7 +326,7 @@ input[type=tel]  {
   box-sizing: border-box;
   margin-left:2%;
 }
-input[type=checkbox]  {
+.formulaire input[type=checkbox]  {
   width: 15vw;
   padding: 0.8vh 0.8vh;
   margin: 0.8vh 0;
@@ -287,7 +334,7 @@ input[type=checkbox]  {
   box-sizing: border-box;
   margin-left:2%;
 }
-input[type=date]  {
+.formulaire input[type=date]  {
   width: 15vw;
   padding: 0.8vh 0.8vh;
   margin: 0.8vh 0;
@@ -296,7 +343,7 @@ input[type=date]  {
   margin-left:2%;
 
 }
-input[type=number]  {
+.formulaire input[type=number]  {
   width: 5vw;
     padding: 0.8vh 0.8vh;
   margin: 0.8vh 0;

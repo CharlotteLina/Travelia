@@ -2,6 +2,8 @@ var lesDestinations=[];
 var url=window.location.href;
 var laDestinationChoisi=[];
 
+var prixMin=0;
+var prixMax=2000;
 ////////////////////////////
 ///FONCTIONS GENERALES ///
 ////////////////////////////
@@ -35,7 +37,6 @@ function initLoad()
 	let testHome=url.indexOf("index");
 	let testReservation=url.indexOf("reservation");
 	let testRecapitulatif=url.indexOf("recapitulatif");
-	let testAproposContact=url.indexOf("contact");
 
 	//Chargement des différentes destinations
 	fetch("http://127.0.0.1:5500/voyages.json").then(response => response.json()).then(response => {
@@ -131,37 +132,78 @@ function getMoisDate(number)
 //Fonction pour le chargement de la page accueil
 function chargementPageIndex()
 {
-	slidderFunction();
+	
 	var template = document.querySelector("#templateVoyage");
-	for (var v of lesDestinations) {					
+	for (var v of lesDestinations) {
+		//On met à jour le prix Max
 		let clone = document.importNode(template.content, true);   
 		newContent = clone.firstElementChild.innerHTML	
 			.replace(/{{destination}}/g, v.destination)		
 			.replace(/{{prix}}/g, v.prixVoyage)
 			.replace(/{{monId}}/g, v.id);	
+		
 		clone.firstElementChild.innerHTML = newContent;
 		clone.firstElementChild.style.backgroundImage=v.image;
+		clone.firstElementChild.id=v.ShortName;
 		document.getElementById('containeVoyage').appendChild(clone);
 		temperature(v.id,v.destination);
 	};
+		slidderFunction();
+
 }
+function changementDestination()
+{
+	//ajoute et trie en fonction des val
+	var template = document.querySelector("#templateVoyage");
+	for (var v of lesDestinations) {
+		$( "#"+v.ShortName ).remove();
+
+	}
+	console.log(prixMin);
+	console.log(prixMax);
+
+	for (var v of lesDestinations) {
+		//trie en fonction du prix
+		if(v.prixVoyage>=prixMin&&v.prixVoyage<=prixMax)
+		{
+			let clone = document.importNode(template.content, true);   
+			newContent = clone.firstElementChild.innerHTML	
+			.replace(/{{destination}}/g, v.destination)		
+			.replace(/{{prix}}/g, v.prixVoyage)
+			.replace(/{{monId}}/g, v.id);	
+		
+		clone.firstElementChild.innerHTML = newContent;
+		clone.firstElementChild.style.backgroundImage=v.image;
+		clone.firstElementChild.id=v.ShortName;
+		document.getElementById('containeVoyage').appendChild(clone);
+		temperature(v.id,v.destination);
+		}
+	};
+
+}
+function mouseup(event,ui)
+{
+	console.log("here");
+	changementDestination();
+}
+
 
 function slidderFunction(){
 	$( function () {
 $( "#slider-range" ).slider({
   range: true,
   min: 0,
-  max: 2000,
+  max: 1500,
   step:20,
-  values: [ 50, 2000 ],
+  values: [ 50, 1500 ],
   slide: function( event, ui ) {
 	$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-	//changementDestinationAfficheViaPrix();      
+	prixMax=ui.values[1];
+	prixMin=ui.values[0];
   }
 });
-$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-  " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-  console.log("lesDestination") 
+	$( "#amount" ).val( prixMin + " € - "+ prixMax +" €");
+	console.log("lesDestination") 
 } );
 }
 function getVals(){
@@ -267,7 +309,7 @@ function chargementPageReservation()
 		let templateWithoutId = document.querySelector("#templateReservationWithoutId");
 
 		//Récupération des destionation
-		var listeDestination="<FORM> <SELECT id='listeVille' name='dest' size='1''>";
+		var listeDestination="<FORM> <SELECT id='listeVille' name='dest' size='1' class='resSelect'>";
 		for (var v of lesDestinations) {
 			listeDestination+="<OPTION value='"+v.id+"'>"+v.destination;
 		};
