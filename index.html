@@ -4,6 +4,10 @@
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" href="css/style.css">
 		<script src="js/script.js"></script>
+		<script type="text/javascript" src="/lib/jquery-3.4.1.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<title> PageAccueil </title>
 	</head>
 
@@ -13,7 +17,16 @@
 	<section>
 		<h1>Bienvenue sur Travelia</h1>
 		<p class="introduction">Choissisez une destination pour enfin aller au bout de vos rêves</p>
+		<p>
+			<label for="amount">Price range:</label>
+			<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		  </p>
+		  <div id="slider-range"></div>
+
 		<div class="grid-container" id="containeVoyage">
+
+			   
+			   
 		<template id="templateVoyage">
 				<div class="grid-item">
 					<div class="meteo"><span class="textMeteo" id={{monId}}></span></div>
