@@ -21,33 +21,29 @@
 		<section class="zoneFiltre">
 			<article class="filtreContinent">
 				<h3 style="margin-top:2vh;">Choisir un continent : </h3>
-				<select name="continent" id="continent-select">
+				<select name="continent" id="continent-select" onchange="changementDestination()">
 				<option value="tous">Tous</option>
 				<option value="Asie">Asie</option>
 				<option value="Afrique">Afrique</option>
 				<option value="Amerique">Amerique</option>
 				<option value="Europe">Europe</option>
-				<option value="Oceanie">Océanie</option>
+				<option value="Oceanie">Oceanie</option>
 				</select>
 			</article>
 			<article class="filtrePrix">
 				<h3 style="margin-top:2vh;">Choisir un prix minimum et maximum : </h3>
 					<input type="text" id="amount" readonly style="background-color:#d5dadb; border:0; color:#1b9296; text-align:center;font-weight:bold;">
-					<div id="slider-range" onmouseup="mouseup()" style="width:80%; margin-left:10%; margin-top:2%;"></div>
+					<div id="slider-range" onmouseup="changementDestination()" style="width:80%; margin-left:10%; margin-top:2%;"></div>
 			</article>
 			<article class="filtreOption">
 				<h3 style="margin-top:2vh;">Choisir des options : </h3>
 				<div class="optionFiltre">
-					<label class="optPetitDej" for="optPetitDej">Petit déjeuner </label>
-					<input type="checkbox" name="optPetitDej" id="optPetitDej" >
-				</div>
-				<div class="optionFiltre">
 					<label class="optAnimaux" for="optAnimaux">Animaux accepté</label>
-					<input type="checkbox" name="optAnimaux" id="optAnimaux"  >	
+					<input type="checkbox" name="optAnimaux" id="optAnimaux" onchange="animauxChange()"  >	
 				</div>
 				<div class="optionFiltre">
 					<label class="optWiFi" for="optWiFi">Wifi proposé</label>
-					<input type="checkbox" name="optWiFi" id="optWiFi"  >
+					<input type="checkbox" name="optWiFi" id="optWiFi" onchange="wifiChange()"  >
 				</div>
 
 			</article>

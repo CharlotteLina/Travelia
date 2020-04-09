@@ -229,7 +229,7 @@ opacity:1;
   margin-left:4%;
   height:20vh;
   background-color:white;
-  border:2px solid grey;
+  border:2px solid #bce9eb;
 }
 .filtreOption{
   margin-top:-20.5vh;
@@ -237,13 +237,14 @@ opacity:1;
   margin-left:66%;
   height:20vh;
   background-color:white;
-  border:2px solid grey;
+  border:2px solid #bce9eb;
 }
 
 .filtreContinent select{
   width:40vh;
   font-size:1em;
-  margin-left:15%;
+  margin-left:25%;
+  margin-top:2vh;
 }
 .filtrePrix
 {
@@ -253,7 +254,7 @@ opacity:1;
   height:20vh;
   text-align: center;
   background-color:white;
-  border:2px solid grey;
+  border:2px solid #bce9eb;
 }
 .optionFiltre{
   
