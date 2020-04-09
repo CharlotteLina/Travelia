@@ -1,6 +1,7 @@
 [
 {
 	"id":"1",
+	"ShortName":"idBali",
 	"destination":"Bali",
 	"prixVoyage":"899",
 	"prixHotel":"30",
@@ -12,6 +13,7 @@
 },
 {
 	"id":"2",
+	"ShortName":"idNY",
 	"destination":"New York",
 	"prixVoyage":"1200",
 	"prixHotel":"100",
@@ -21,6 +23,7 @@
 },
 {
 	"id":"3",
+	"ShortName":"idRioDJ",
 	"destination":"Rio de janeiro",
 	"prixVoyage":"999",
 	"prixHotel":"50",
@@ -31,6 +34,8 @@
 },
 {
 	"id":"4",
+	"ShortName":"idLondres",
+
 	"destination":"Londres",
 	"prixVoyage":"199",
 	"prixHotel":"60",
@@ -41,6 +46,7 @@
 },
 {
 	"id":"5",
+	"ShortName":"idParis",
 	"destination":"Paris",
 	"prixVoyage":"99",
 	"prixHotel":"70",
@@ -51,6 +57,7 @@
 },
 {
 	"id":"6",
+	"ShortName":"idVenise",
 	"destination":"Venise",
 	"prixVoyage":"199",
 	"prixHotel":"60",

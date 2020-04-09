@@ -2,6 +2,12 @@ var lesDestinations=[];
 var url=window.location.href;
 var laDestinationChoisi=[];
 
+var prixMin=0;
+var prixMax=2000;
+////////////////////////////
+///FONCTIONS GENERALES ///
+////////////////////////////
+
 //Modèle pour l'en tête
 function htmlHeader()
 {
@@ -13,7 +19,6 @@ function htmlHeader()
              '<li><a href="contact.html">A propos & Contact</a></li>'+
              '</ul> </nav> '
 }
-
 //Modèle pour le pied de page
 function htmlFooter()
 {
@@ -23,7 +28,7 @@ function htmlFooter()
 	return 	`<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 			<p>© Copyright 2019-2020 Fourel-Gauthier- Tous droits réservés</p>`
 }
-
+//Fonction pour le chargement de toute les pages
 function scrollFunction() {
 	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 	  mybutton.style.display = "block";
@@ -45,10 +50,10 @@ function initLoad()
 	document.querySelector('footer').innerHTML +=htmlFooter();
 
 	//Preparation pour le chargement des différentes pages
+	var url=window.location.href;
 	let testHome=url.indexOf("index");
 	let testReservation=url.indexOf("reservation");
 	let testRecapitulatif=url.indexOf("recapitulatif");
-	let testAproposContact=url.indexOf("contact");
 
 	//Chargement des différentes destinations
 	fetch("http://127.0.0.1:5500/voyages.json").then(response => response.json()).then(response => {
@@ -71,36 +76,180 @@ function initLoad()
 			chargementPageRecapitulatif()
 
 		}
-		
-		//Chargement de la page à propos & contact
-		if(testAproposContact!=-1)
-		{
-
-		}
 	});
-
-
 	
 }
 
+//Calcule du nombre de jour
+function dateDiff(date1, date2){
+    var diff = {}                           // Initialisation du retour
+    var tmp = date2 - date1;
+ 
+    tmp = Math.floor(tmp/1000);             // Nombre de secondes entre les 2 dates
+    diff.sec = tmp % 60;                    // Extraction du nombre de secondes
+
+    tmp = Math.floor((tmp-diff.sec)/60);    // Nombre de minutes (partie entière)
+    diff.min = tmp % 60;                    // Extraction du nombre de minutes
+ 
+    tmp = Math.floor((tmp-diff.min)/60);    // Nombre d'heures (entières)
+    diff.hour = tmp % 24;                   // Extraction du nombre d'heures
+     
+    tmp = Math.floor((tmp-diff.hour)/24);   // Nombre de jours restants
+    diff.day = tmp;
+     
+    return diff;
+}
+//Fonction pour récuperer parametre dans URL
+function getUrlParam() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+//Fonction pour avoir le mois écrit en toute lettre
+function getMoisDate(number)
+{
+	console.log(number);
+	switch (number) {
+		case '01':
+			return "janvier";break;
+		case '02':
+			return "février";break;		
+		case '03':
+			return "mars";break;		
+		case '04':
+			return "avril";break;		
+		case '05':
+			return "mai";break;		
+		case '06':
+			return "juin";break;		
+		case '07':
+			return "juillet";break;		
+		case '08':	
+			return "aout";break;		
+		case '09':
+			return "septembre";break;		
+		case '10':
+			return "octobre";break;	
+		case '11':
+			return "novembre";break;
+		case '12':
+			return "décembre";break;	
+		default:
+			break;
+	}
+}
+
+
+////////////////////////////
+///FONCTION POUR ACCUEIL ///
+////////////////////////////
 
 //Fonction pour le chargement de la page accueil
 function chargementPageIndex()
 {
+	
 	var template = document.querySelector("#templateVoyage");
-	for (var v of lesDestinations) {					
+	for (var v of lesDestinations) {
+		//On met à jour le prix Max
 		let clone = document.importNode(template.content, true);   
 		newContent = clone.firstElementChild.innerHTML	
 			.replace(/{{destination}}/g, v.destination)		
 			.replace(/{{prix}}/g, v.prixVoyage)
 			.replace(/{{monId}}/g, v.id);	
+		
 		clone.firstElementChild.innerHTML = newContent;
 		clone.firstElementChild.style.backgroundImage=v.image;
+		clone.firstElementChild.id=v.ShortName;
 		document.getElementById('containeVoyage').appendChild(clone);
 		temperature(v.id,v.destination);
 	};
+		slidderFunction();
+
+}
+function changementDestination()
+{
+	//ajoute et trie en fonction des val
+	var template = document.querySelector("#templateVoyage");
+	for (var v of lesDestinations) {
+		$( "#"+v.ShortName ).remove();
+
+	}
+	console.log(prixMin);
+	console.log(prixMax);
+
+	for (var v of lesDestinations) {
+		//trie en fonction du prix
+		if(v.prixVoyage>=prixMin&&v.prixVoyage<=prixMax)
+		{
+			let clone = document.importNode(template.content, true);   
+			newContent = clone.firstElementChild.innerHTML	
+			.replace(/{{destination}}/g, v.destination)		
+			.replace(/{{prix}}/g, v.prixVoyage)
+			.replace(/{{monId}}/g, v.id);	
+		
+		clone.firstElementChild.innerHTML = newContent;
+		clone.firstElementChild.style.backgroundImage=v.image;
+		clone.firstElementChild.id=v.ShortName;
+		document.getElementById('containeVoyage').appendChild(clone);
+		temperature(v.id,v.destination);
+		}
+	};
+
+}
+function mouseup(event,ui)
+{
+	console.log("here");
+	changementDestination();
 }
 
+
+function slidderFunction(){
+	$( function () {
+$( "#slider-range" ).slider({
+  range: true,
+  min: 0,
+  max: 1500,
+  step:20,
+  values: [ 50, 1500 ],
+  slide: function( event, ui ) {
+	$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+	prixMax=ui.values[1];
+	prixMin=ui.values[0];
+  }
+});
+	$( "#amount" ).val( prixMin + " € - "+ prixMax +" €");
+	console.log("lesDestination") 
+} );
+}
+function getVals(){
+// Get slider values
+var parent = this.parentNode;
+var slides = parent.getElementsByTagName("input");
+  var slide1 = parseFloat( slides[0].value );
+  var slide2 = parseFloat( slides[1].value );
+// Neither slider will clip the other, so make sure we determine which is larger
+if( slide1 > slide2 ){ var tmp = slide2; slide2 = slide1; slide1 = tmp; }
+
+var displayElement = parent.getElementsByClassName("rangeValues")[0];
+	displayElement.innerHTML = "$ " + slide1 + "k - $" + slide2 + "k";
+}
+
+window.onload = function(){
+// Initialize Sliders
+var sliderSections = document.getElementsByClassName("range-slider");
+	for( var x = 0; x < sliderSections.length; x++ ){
+	  var sliders = sliderSections[x].getElementsByTagName("input");
+	  for( var y = 0; y < sliders.length; y++ ){
+		if( sliders[y].type ==="range" ){
+		  sliders[y].oninput = getVals;
+		  // Manually trigger event first time to display values
+		  sliders[y].oninput();
+		}
+	  }
+	}
+}
 //Récupération de la température et maj du site
 function temperature(id,dest){
 	//Crée la requète a l'api openweathermap
@@ -117,6 +266,21 @@ function temperature(id,dest){
 		xhttp.send();
 }
 
+////////////////////////////////
+///FONCTION POUR RESERVATION ///
+////////////////////////////////
+
+//Lien pour la réservation
+function reservation(id)
+{
+	window.location.assign("http://127.0.0.1:5500/reservation.html?id="+id);
+}
+//Lien pour réservation de l'onglet réservation
+function reserverChoose() {
+	
+	var id=document.getElementById('listeVille').value;
+	reservation(id);	
+}
 //Fonction pour le chargement de la page réservation
 function chargementPageReservation()
 {
@@ -134,18 +298,16 @@ function chargementPageReservation()
 				laDestinationChoisi=v;
 				let cloneId = document.importNode(templateWithId.content, true);   
 				newContent = cloneId.firstElementChild.innerHTML	
-        
-        
-
 					.replace(/{{villeId}}/g, v.destination)
 					.replace(/{{Description}}/g, v.description);
 				cloneId.firstElementChild.innerHTML = newContent;
-				document.getElementById('containerReservationWithId').appendChild(cloneId);	
+				document.getElementById('containerReservation').appendChild(cloneId);	
 				let image=document.getElementById('imageDest');
 				image.style.backgroundImage=v.imageRes;
 				image.style.backgroundSize="cover";
 				sessionStorage.setItem("ville",v.destination); 
-				
+				sessionStorage.setItem("descriptionVille",v.description); 
+
 				//On conserve les prix 
 				sessionStorage.setItem("prixVoyage",v.prixVoyage); 
 				sessionStorage.setItem("prixHotel",v.prixHotel); 
@@ -159,17 +321,11 @@ function chargementPageReservation()
 	//Ouverture de la page sans choix initial la liste
 	if(idReservation==undefined )
 	{
-		//Récupération des template
-		let templateTitle = document.querySelector("#TitleReservation");
+		//Récupération du template
 		let templateWithoutId = document.querySelector("#templateReservationWithoutId");
 
-		//Mise a jour titre
-		let cloneTitle = document.importNode(templateTitle.content, true);   
-		document.getElementById('containerReservationWithoutId').appendChild(cloneTitle);	
-
-
 		//Récupération des destionation
-		var listeDestination="<FORM> <SELECT id='listeVille' name='dest' size='1''>";
+		var listeDestination="<FORM> <SELECT id='listeVille' name='dest' size='1' class='resSelect'>";
 		for (var v of lesDestinations) {
 			listeDestination+="<OPTION value='"+v.id+"'>"+v.destination;
 		};
@@ -179,85 +335,10 @@ function chargementPageReservation()
 			newContent = clone.firstElementChild.innerHTML
 				.replace(/{{ListeVille}}/g, listeDestination)
 			clone.firstElementChild.innerHTML = newContent;
-			document.getElementById('containerReservationWithoutId').appendChild(clone);		
+			document.getElementById('containerReservation').appendChild(clone);		
 	}
 }
-
-function chargementPageRecapitulatif()
-{
-	//On récupère le valeur selectionné
-	var ville = sessionStorage.getItem("ville"); 
-	var numRes = sessionStorage.getItem("numeroReservation"); 
-
-	var name = sessionStorage.getItem("name"); 
-	var username = sessionStorage.getItem("username"); 
-	var phone = sessionStorage.getItem("phone"); 
-	var email = sessionStorage.getItem("email");
-	var dateD = sessionStorage.getItem("dateD"); 
-	var dateR = sessionStorage.getItem("dateR");	
-	var nbAdulte = sessionStorage.getItem("nbAdulte"); 
-	var nbEnfant = sessionStorage.getItem("nbEnfant");	
-	var petitDej = sessionStorage.getItem("petitDej"); 
-	var infoComple = sessionStorage.getItem("infoComple");
-
-    //On change la valeur écrite de petitDej
-    if(petitDej==true){petitDej="Compris";}
-    else{petitDej="Non Compris";}
-    
-    //On change la valeur de nbAdulte 
-    if(nbAdulte==1){nbAdulte=nbAdulte+" adulte"}
-    else{nbAdulte=nbAdulte+" adultes"}
-    
-    //On change la valeur de nbEnfant 
-    if(nbEnfant==0){nbEnfant="."}
-    else{
-        if(nbEnfant==1){nbEnfant=" et "+nbEnfant+ " enfant. "}
-        else{bEnfant=" et "+nbEnfant+ " enfants. "}
-    }
-	//Récupération des template
-	let templateRecap = document.querySelector("#templateRecapitulatif");
-
-	console.log(templateRecap);
-	//Mise a jour titre
-	let cloneRecap = document.importNode(templateRecap.content, true); 
-	newContent=cloneRecap.firstElementChild.innerHTML
-		.replace(/{{villeName}}/g, ville)
-		.replace(/{{name}}/g, name)
-		.replace(/{{username}}/g, username)
-		.replace(/{{email}}/g, email)
-		.replace(/{{phone}}/g, phone)
-		.replace(/{{dateDepart}}/g, dateD)		
-		.replace(/{{dateRetour}}/g, dateR)
-		.replace(/{{nbAdulte}}/g, nbAdulte)
-		.replace(/{{nbEnfant}}/g, nbEnfant)		
-		.replace(/{{petitDej}}/g, petitDej)
-		.replace(/{{infosCompl}}/g, infoComple)	
-		.replace(/{{numeroReservation}}/g, numRes);
-	cloneRecap.firstElementChild.innerHTML = newContent;
-	console.log(newContent);
-	document.getElementById('recapitulatif').appendChild(cloneRecap);
-}
-
-function recapitulatif(numeroRes)
-{
-	//AJOUTER ID RESERVATION
-	window.location.assign("http://127.0.0.1:5500/recapitulatif.html?id+"+numeroRes);
-}
-//Lien pour réservation de l'onglet réservation
-function reserverChoose() {
-	
-	var id=document.getElementById('listeVille').value;
-	reservation(id);	
-}
-
-//Lien pour la réservation
-function reservation(id)
-{
-	window.location.assign("http://127.0.0.1:5500/reservation.html?id="+id);
-}
-
-
-
+//Fonction pour valider le formulaire
 function validForm()
 {
 	//On récupère les informations personnelles
@@ -284,50 +365,56 @@ function validForm()
 	}
 	else
 	{
+		var resDate=ValiderDateDepart(dateD);
+		var resEmail=ValiderEmail(email);
+		var resTelephone=ValiderTelephone(phone);
 
-		var dD=new Date(dateD);
-		var dR=new Date(dateR);
-		//Vérication saisie des dates
-		if(dD=="Invalid Date"||dR=="Invalid Date" )
+		if(resDate==true && resEmail==true && resTelephone ==true)
 		{
-			errorZone.innerHTML="Il faut une date d'arrivée et de retour";
-			errorZone.style.visibility="visible";
-
-		}
-		else
-		{
-			var nbJ=dateDiff(dD,dR);
-			//Vérication date cohérente
-			if(nbJ<0)
+			var dD=new Date(dateD);
+			var dR=new Date(dateR);
+			//Vérication saisie des dates
+			if(dD=="Invalid Date"||dR=="Invalid Date" )
 			{
-				errorZone.innerHTML="La date de retour doit être supérieur à celle d'arrivée";
+				errorZone.innerHTML="Il faut une date d'arrivée et de retour";
 				errorZone.style.visibility="visible";
 
 			}
 			else
 			{
-				if(nbAdulte==0)
+				var nbJ=dateDiff(dD,dR);
+				//Vérication date cohérente
+				if(nbJ.day<0)
 				{
-					errorZone.innerHTML="Il faut au moins un adulte";
+					errorZone.innerHTML="La date de retour doit être supérieur à celle d'arrivée";
 					errorZone.style.visibility="visible";
-s
+
 				}
 				else
 				{
-					//On créer le numéro de reservation
-					var numeroRes=Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
-					sessionStorage.setItem("numeroReservation",numeroRes); 
-					sessionStorage.setItem("name",nameValue); 
-					sessionStorage.setItem("username",usernameValue); 
-					sessionStorage.setItem("email",email); 
-					sessionStorage.setItem("phone",phone); 
-					sessionStorage.setItem("dateD",dateD); 	
-					sessionStorage.setItem("dateR",dateR); 
-					sessionStorage.setItem("nbAdulte",nbAdulte); 	
-					sessionStorage.setItem("nbEnfant",nbEnfant); 
-					sessionStorage.setItem("petitDej",petitDej); 	
-					sessionStorage.setItem("infoComple",infoComple); 
-					recapitulatif(numeroRes);
+					if(nbAdulte==0)
+					{
+						errorZone.innerHTML="Il faut au moins un adulte";
+						errorZone.style.visibility="visible";
+
+					}
+					else
+					{
+						//On créer le numéro de reservation
+						var numeroRes=Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+						sessionStorage.setItem("numeroReservation",numeroRes); 
+						sessionStorage.setItem("name",nameValue); 
+						sessionStorage.setItem("username",usernameValue); 
+						sessionStorage.setItem("email",email); 
+						sessionStorage.setItem("phone",phone); 
+						sessionStorage.setItem("dateD",dateD); 	
+						sessionStorage.setItem("dateR",dateR); 
+						sessionStorage.setItem("nbAdulte",nbAdulte); 	
+						sessionStorage.setItem("nbEnfant",nbEnfant); 
+						sessionStorage.setItem("petitDej",petitDej); 	
+						sessionStorage.setItem("infoComple",infoComple); 
+						recapitulatif(numeroRes);
+					}
 				}
 			}
 		}
@@ -338,15 +425,7 @@ s
 
 
 }
-
-function getUrlParam() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
-}
-
+//Fonction pour calculer le prix
 function calculerPrix()
 {
 
@@ -357,7 +436,6 @@ function calculerPrix()
 	var nbE= new Number(document.getElementById("nbEnfant").value);
 	var petitDej=document.getElementById("petitDej").checked;
 	var lePrix= document.getElementById("thePrice");
-
 	//Si une des dates est vide
 	if(dD!="Invalid Date"&&dR!="Invalid Date" && nbA!=0)
  	{
@@ -382,10 +460,12 @@ function calculerPrix()
 			var prixVoyage=sessionStorage.getItem("prixVoyage"); 
 			var prixHotel=sessionStorage.getItem("prixHotel"); 
 
-			var PrixVol=((nbE+nbA)*prixVoyage);
+			var PrixVol=((nbA*prixVoyage)+(nbE*prixVoyage*0.4));
+			
 			var PrixHotel=(nbA*prixHotel*nbJ.day)+(nbE*(prixHotel*0.4)*nbJ.day)+((nbE+nbA)*nbJ.day*prixPetitDej);
 			var PrixTotal=PrixVol+PrixHotel;
-			console.log(PrixTotal);
+			sessionStorage.setItem("prixTotalVol",PrixVol);
+			sessionStorage.setItem("prixTotalHotel",PrixHotel);
 
 			lePrix.innerHTML=PrixTotal+"€";
 
@@ -397,24 +477,181 @@ function calculerPrix()
 		//mettre le prix a 0
 	}
 }
+//Verifiier date de depart superieur a date aujourd'huii
+function ValiderDateDepart(dateDep)
+{
+	var errorZone=document.getElementById("errorMessage");
+	console.log("here");
+	var today = new Date();
+	var dd = String(today.getDate()).padStart(2, '0');
+	var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+	var yyyy = today.getFullYear();
 
-
-//Calcule du nombre de jour
-function dateDiff(date1, date2){
-    var diff = {}                           // Initialisation du retour
-    var tmp = date2 - date1;
- 
-    tmp = Math.floor(tmp/1000);             // Nombre de secondes entre les 2 dates
-    diff.sec = tmp % 60;                    // Extraction du nombre de secondes
-
-    tmp = Math.floor((tmp-diff.sec)/60);    // Nombre de minutes (partie entière)
-    diff.min = tmp % 60;                    // Extraction du nombre de minutes
- 
-    tmp = Math.floor((tmp-diff.min)/60);    // Nombre d'heures (entières)
-    diff.hour = tmp % 24;                   // Extraction du nombre d'heures
-     
-    tmp = Math.floor((tmp-diff.hour)/24);   // Nombre de jours restants
-    diff.day = tmp;
-     
-    return diff;
+	console.log(dateDep);
+	var dateDepC=dateDep.split('-');
+	if(dateDepC[0]>=yyyy&&dateDepC[1]>=mm&&dateDepC[2]>=dd)
+	{
+		return true;
+	}
+	else
+	{
+		errorZone.innerHTML="Date de départ doit être supérieur à aujourd'hui";
+		errorZone.style.visibility="visible";
+		return false;
+	}
+	console.log(dateDepC);
+} 
+//Vérification téléphone
+function ValiderTelephone(phoneNum)
+{
+	var errorZone=document.getElementById("errorMessage");
+  	if(/^\d{10}$/.test(phoneNum))
+	{
+	return true;
+	}
+		errorZone.innerHTML="Numéro de téléphone invalide (Exemple : 0601020304)";
+		errorZone.style.visibility="visible";
+		return false;
+	
 }
+//Verification email
+function ValiderEmail(mail) 
+{
+	var errorZone=document.getElementById("errorMessage");
+	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+	{
+		return (true)
+	}
+	errorZone.innerHTML="Email invalide (Exemple : test@email.fr)";
+	errorZone.style.visibility="visible";
+	return (false)
+}
+
+
+//////////////////////////////////
+///FONCTION POUR RECAPITULATIF ///
+//////////////////////////////////
+
+//Lien pour le récapitulatif
+function recapitulatif(numeroRes)
+{
+	//AJOUTER ID RESERVATION
+	window.location.assign("http://127.0.0.1:5500/recapitulatif.html?id+"+numeroRes);
+}
+//Fonction pour le chargement de la page récapitulatif
+function chargementPageRecapitulatif()
+{
+	//On récupère le valeur selectionné général
+	var ville = sessionStorage.getItem("ville"); 
+	var numRes = sessionStorage.getItem("numeroReservation"); 
+
+	//On récupere les valeur pour la zone personnelles
+	var name = sessionStorage.getItem("name"); 
+	var username = sessionStorage.getItem("username"); 
+	var phone = sessionStorage.getItem("phone"); 
+	var email = sessionStorage.getItem("email");
+
+	//On récupere pour la zone du voyage
+	var dateDepart = sessionStorage.getItem("dateD"); 
+	var dateRetour = sessionStorage.getItem("dateR");	
+	var nbAdulte = sessionStorage.getItem("nbAdulte"); 
+	var nbEnfant = sessionStorage.getItem("nbEnfant");	
+	var petitDej = sessionStorage.getItem("petitDej"); 
+	var infoComple = sessionStorage.getItem("infoComple");
+	var descritionVoyage=sessionStorage.getItem("descriptionVille"); 
+	
+	//On récupère les valeurs pour les dates
+	var dateD=dateDepart.split('-');
+	moisAller=getMoisDate(dateD[1]);
+	var dateR=dateRetour.split('-');
+	moisRetour=getMoisDate(dateR[1]);
+
+	//On change la valeur pour adulte
+	var textAdulte;
+    if(nbAdulte==1){textAdulte=nbAdulte+" adulte";}
+	else{textAdulte=nbAdulte+" adultes";}
+	
+	//On change la valeur de nbEnfant 
+	var textEnfant;
+    if(nbEnfant==0){textEnfant="."}
+    else{
+        if(nbEnfant==1){textEnfant=" et "+nbEnfant+ " enfant. ";}
+        else{textEnfant=" et "+nbEnfant+ " enfants. ";}
+	}
+
+	//On change la valeur écrite de petitDej
+	if(petitDej){petitDej="Petit déjeuner compris.";}
+	else{petitDej="Petit déjeuner NON compris";}
+
+	//On change la valeur des infoComple
+	if(!infoComple){infoComple="";}
+	else{infoComple="<div>Infos complémentaires:"+infoComple+"</div>"}
+
+	//On prepare les variables
+	var lesDates=dateD[2]+ " "+ moisAller+ " "+ dateD[0]+" au " +dateR[2]+ " "+ moisRetour+ " "+ dateR[0];
+	var lesVoyageurs=textAdulte+ textEnfant;
+	var autreInfo=petitDej+infoComple;
+
+	//On récupere les variables pour le prix
+	var prixVol=sessionStorage.getItem("prixTotalVol"); 
+	var prixHotel=sessionStorage.getItem("prixTotalHotel"); 			
+	var prixUnitaireVol=sessionStorage.getItem("prixVoyage"); 
+	var prixUnitaireHotel=sessionStorage.getItem("prixHotel"); 
+	var petitDej=12;
+	var prixTotal=new Number(prixVol)+new Number(prixHotel);
+	var nbJ=dateDiff(new Date(dateDepart),new Date(dateRetour));
+
+	//Calcul des prix adultes
+	var prixAdulteVol=prixUnitaireVol*nbAdulte;
+	var prixAdulteHotel=prixUnitaireHotel*nbAdulte*nbJ.day;
+	var prixAdultePetitDej=petitDej*nbAdulte*nbJ.day;
+	//Calcul des priix enfants
+
+	var ContentEnfant="";
+	if(nbEnfant>0)
+	{
+		var prixEnfantVol=prixUnitaireVol*nbEnfant*0.4;
+		var prixEnfantHotel=prixUnitaireHotel*nbEnfant*0.4*nbJ.day;
+		var prixEnfantPetitDej=petitDej*nbEnfant*nbJ.day;	
+		ContentEnfant="<tr><th>Enfant</th>"+
+							"<td>"+nbEnfant+"</td>"+
+							"<td>"+prixEnfantVol+" €</td>"+
+							"<td>"+prixEnfantHotel+" €</td>"+
+							"<td>"+prixEnfantPetitDej+"€</td>"+
+						"</tr>";
+	}
+	var Content="<table><tr><th></th><th>Passagers</th><th>Vol</th><th>Hotel</th><th>Petit déjeuner</th></tr><tr><th>Adulte</th>"+
+							"<td>"+nbAdulte+"</td>"+
+							"<td>"+prixAdulteVol+" €</td>"+
+							"<td>"+prixAdulteHotel+" €</td>"+
+							"<td>"+prixAdultePetitDej+"€</td>"+
+						"</tr>"+ContentEnfant+"</table>";
+
+	//Récupération des template
+	let templateRecap = document.querySelector("#templateRecapitulatif");
+
+	//On met en place directement dans la vie
+	let cloneRecap = document.importNode(templateRecap.content, true); 
+	newContent=cloneRecap.firstElementChild.innerHTML
+		.replace(/{{villeName}}/g, ville)
+		.replace(/{{numeroReservation}}/g, numRes)
+
+		.replace(/{{name}}/g, name)
+		.replace(/{{username}}/g, username)
+		.replace(/{{email}}/g, email)
+		.replace(/{{phone}}/g, phone)
+
+		.replace(/{{descriptionDestination}}/g,descritionVoyage)
+		.replace(/{{lesDates}}/g,lesDates)
+		.replace(/{{lesVoyageurs}}/g,lesVoyageurs)
+		.replace(/{{autresInformation}}/g,autreInfo)
+
+		.replace(/{{theTable}}/g,Content)
+
+		.replace(/{{prixTotal}}/g,prixTotal);
+		
+	cloneRecap.firstElementChild.innerHTML = newContent;
+	document.getElementById('recapitulatif').appendChild(cloneRecap);
+}
+
+
