@@ -144,6 +144,7 @@ PAGE DACCUEIL
   font-size: 1.3em;
   font-weight: bold;
 }
+
 /*Grille page d'accueil*/
 .grid-container {
   display: grid;
@@ -226,12 +227,28 @@ opacity:1;
   margin-top:1vh;
   position: absolute;
 }
+
+/*Zone des filtres */
+.chooseContinent{
+  margin-top:-2vh;
+}
 .zoneFiltre{
   width:90%;
   margin-left:5%;
-  height:25vh;
-}
+  padding:0.3vh;
+  margin-bottom: 2vh;
+  background-color: white;
+  height:27vh;
+  border:1px solid #bce9eb;
 
+}
+.zoneFiltre h2{
+  margin-left: 3%;
+  color:#09c9bf;
+  padding:1vh;
+  font-size:1.1em;
+  height:1vh;
+}
 
 .zoneFiltre h3{
   font-size:0.9em;
@@ -241,35 +258,50 @@ opacity:1;
 }
 .filtreContinent{
   width:30%;
-  margin-left:4%;
-  height:20vh;
+  margin-left:5%;
+  margin-top:2vh;
+  height:15vh;
   background-color:white;
-  border:2px solid #bce9eb;
+  border-right:2px solid #bce9eb;
 }
 .filtreOption{
-  margin-top:-20.5vh;
+  margin-top:-14.5vh;
   width:30%;
-  margin-left:66%;
-  height:20vh;
+  margin-left:67%;
+  height:15vh;
   background-color:white;
-  border:2px solid #bce9eb;
 }
 
 .filtreContinent select{
-  width:40vh;
   font-size:1em;
-  margin-left:25%;
-  margin-top:2vh;
+
+  width:80%; 
+  margin-left:10%; 
+  margin-top:2%;
 }
 .filtrePrix
 {
-  margin-top:-20.5vh;
+  margin-top:-15.5vh;
   width:30%;
-  margin-left:35%;
-  height:20vh;
+  margin-left:36%;
+  height:15vh;
   text-align: center;
   background-color:white;
-  border:2px solid #bce9eb;
+  border-right:2px solid #bce9eb;
+}
+
+.filtrePrix input{
+  background-color:#d5dadb;
+   border:0; 
+   color:#1b9296; 
+   text-align:center;
+   font-weight:bold;
+}
+
+.rangeFiltre{
+  width:80%; 
+  margin-left:10%; 
+  margin-top:2%;
 }
 .optionFiltre{
   
@@ -311,7 +343,7 @@ PAGE RESERVERTION
 .formulaire{
     margin-left:3vw;
     width:58vw; 
-    border: #b7bdbc solid 1px;
+    border: #bce9eb solid 1px;
     height:90vh;
     background-color: white;
     text-align:center; 
@@ -434,11 +466,12 @@ select
 /*//////////////////////////////////////////////////////////////
 PAGE RECAPITULATIF
  //////////////////////////////////////////////////////////////*/
-#recapitulatif{
+.zoneRecap{
   background-color: white;
   width:80%;
   margin-left:10%;
 }
+
 
  .recapTitle
 {
@@ -620,3 +653,17 @@ Bouton
   transform: rotate(-90deg);
     width: auto;
 }
+
+.FirstSousTitre{
+  margin-top:-5vh;
+}
+.boutonCroix{
+  height: 6vh;
+  width: 6vh;
+  font-size:3vh;
+  font-weight: bold;
+  background-color:#09c9bf;
+  margin-left:90%;
+  margin-top:2vh;
+}
+

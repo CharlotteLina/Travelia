@@ -312,13 +312,10 @@ function validForm()
 	var petitDej = document.getElementById("petitDej").checked;
 	var infoComple = document.getElementById("infoComple").value;
 
-	var errorZone=document.getElementById("errorMessage");
-
 	//Vérification informations personnelles
 	if(nameValue==null||nameValue==""||usernameValue==null||usernameValue==""||email==null||email==""||phone==null||phone=="")
 	{
-		errorZone.innerHTML="Il faut un nom,un prénom,un email et un numéro de téléphone";
-		errorZone.style.visibility="visible";
+		majErrorZone("Il faut un nom,un prénom,un email et un numéro de téléphone");
 	}
 	else
 	{
@@ -333,9 +330,7 @@ function validForm()
 			//Vérication saisie des dates
 			if(dD=="Invalid Date"||dR=="Invalid Date" )
 			{
-				errorZone.innerHTML="Il faut une date d'arrivée et de retour";
-				errorZone.style.visibility="visible";
-
+				majErrorZone("Il faut une date d'arrivée et de retour");
 			}
 			else
 			{
@@ -343,17 +338,13 @@ function validForm()
 				//Vérication date cohérente
 				if(nbJ.day<0)
 				{
-					errorZone.innerHTML="La date de retour doit être supérieur à celle d'arrivée";
-					errorZone.style.visibility="visible";
-
+					majErrorZone("La date de retour doit être supérieur à celle d'arrivée");
 				}
 				else
 				{
 					if(nbAdulte==0)
 					{
-						errorZone.innerHTML="Il faut au moins un adulte";
-						errorZone.style.visibility="visible";
-
+						majErrorZone("Il faut au moins un adulte");
 					}
 					else
 					{
@@ -382,10 +373,18 @@ function validForm()
 
 
 }
+
+function majErrorZone(text)
+{
+	var errorZone=document.getElementById("errorMessage");
+	errorZone.innerHTML=text;
+	errorZone.style.visibility="visible";
+	topFunction();
+
+}
 //Fonction pour calculer le prix
 function calculerPrix()
 {
-
 	//On récupere les deux dates
 	var dD= new Date(document.getElementById("dateDepart").value);
 	var dR= new Date(document.getElementById("dateRetour").value);
@@ -394,15 +393,22 @@ function calculerPrix()
 	var petitDej=document.getElementById("petitDej").checked;
 	var lePrix= document.getElementById("thePrice");
 	//Si une des dates est vide
+	if(dD!="Invalid Date")
+	{
+		ValiderDateDepart(document.getElementById("dateDepart").value);
+
+	}
 	if(dD!="Invalid Date"&&dR!="Invalid Date" && nbA!=0)
  	{
 		//On calcule de nombre de jour
 		var nbJ=dateDiff(dD,dR);
-		console.log(nbJ.day);
 		if(nbJ.day<0)
 		{
 			//AFFICHER UN MESSAGE DERREUR
-			console.log("La date de retour ne peut pas être antérieur à la date de l'aller");
+			majErrorZone("La date de retour ne peut pas être antérieur à la date de l'aller");
+			lePrix.innerHTML="0€";
+
+
 		}
 		//On a un nombre de jour positif 
 		else
@@ -431,7 +437,7 @@ function calculerPrix()
 	}
 	else
 	{
-		//mettre le prix a 0
+		lePrix.innerHTML="0€";
 	}
 }
 //Verifiier date de depart superieur a date aujourd'huii
@@ -448,40 +454,38 @@ function ValiderDateDepart(dateDep)
 	var dateDepC=dateDep.split('-');
 	if(dateDepC[0]>=yyyy&&dateDepC[1]>=mm&&dateDepC[2]>=dd)
 	{
+		errorZone.innerHTML="";
+		errorZone.style.visibility="hidden";
 		return true;
 	}
 	else
 	{
-		errorZone.innerHTML="Date de départ doit être supérieur à aujourd'hui";
-		errorZone.style.visibility="visible";
+		majErrorZone("Date de départ doit être supérieur à aujourd'hui");
 		return false;
 	}
-	console.log(dateDepC);
 } 
 //Vérification téléphone
 function ValiderTelephone(phoneNum)
 {
-	var errorZone=document.getElementById("errorMessage");
   	if(/^\d{10}$/.test(phoneNum))
 	{
 	return true;
 	}
-		errorZone.innerHTML="Numéro de téléphone invalide (Exemple : 0601020304)";
-		errorZone.style.visibility="visible";
+		majErrorZone("Numéro de téléphone invalide (Exemple : 0601020304)");
 		return false;
 	
 }
 //Verification email
 function ValiderEmail(mail) 
 {
-	var errorZone=document.getElementById("errorMessage");
 	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
 	{
-		return (true)
+		return true;
 	}
-	errorZone.innerHTML="Email invalide (Exemple : test@email.fr)";
-	errorZone.style.visibility="visible";
-	return (false)
+	majErrorZone("Email invalide (Exemple : test@email.fr)");
+
+
+	return false;
 }
 
 
@@ -684,7 +688,7 @@ window.onscroll = function() {
 };
 
 function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
     mybutton.style.display = "block";
   } else {
     mybutton.style.display = "none";

@@ -4,7 +4,7 @@
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" href="css/style.css">
 		<script src="js/script.js"></script>
-		<script type="text/javascript" src="/lib/jquery-3.4.1.min.js"></script>
+		<script src="/lib/jquery-3.4.1.min.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -23,9 +23,10 @@
 		
 		<!--La zone des filtres-->	
 		<section class="zoneFiltre">
+			<h2>Filtres :</h2>
 			<article class="filtreContinent">
-				<h3 style="margin-top:2vh;">Choisir un continent : </h3>
-				<select name="continent" id="continent-select" onchange="changementDestination()" style="width:80%; margin-left:10%; margin-top:2%;">
+				<h3 class="chooseContinent">Choisir un continent : </h3>
+				<select name="continent" id="continent-select" onchange="changementDestination()">
 				<option value="tous">Tous</option>
 				<option value="Asie">Asie</option>
 				<option value="Afrique">Afrique</option>
@@ -35,12 +36,12 @@
 				</select>
 			</article>
 			<article class="filtrePrix">
-				<h3 style="margin-top:2vh;">Choisir un prix minimum et maximum : </h3>
-					<input type="text" id="amount" readonly style="background-color:#d5dadb; border:0; color:#1b9296; text-align:center;font-weight:bold;">
-					<div id="slider-range" onmouseup="changementDestination()" style="width:80%; margin-left:10%; margin-top:2%;"></div>
+				<h3>Choisir un prix minimum et maximum : </h3>
+					<input type="text" id="amount" readonly>
+					<div id="slider-range" onmouseup="changementDestination()" class="rangeFiltre"></div>
 			</article>
 			<article class="filtreOption">
-				<h3 style="margin-top:2vh;">Choisir des options : </h3>
+				<h3 >Choisir des options : </h3>
 				<div class="optionFiltre">
 					<label class="optAnimaux" for="optAnimaux">Animaux accepté</label>
 					<input type="checkbox" name="optAnimaux" id="optAnimaux" onchange="animauxChange()"  >	
@@ -67,7 +68,7 @@
 		</template>
 		</div>
 	</section>
-		<!--Template du footer ader dans le js-->	
+	<!--Template du footer dans le js-->	
 	<footer></footer>
 	</body>
 </html>

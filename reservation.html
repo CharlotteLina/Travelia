@@ -4,90 +4,95 @@
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" href="css/style.css"/>
 		<script src='js/script.js'></script>
-
+		<script src='https://cdn.polyfill.io/v2/polyfill.min.js%22%3E'></script>
 		<title> Reservations </title>
 	</head>
 
 	<body onload="initLoad()" >
+	<!--Template du heder dans le js-->	
 	<header ></header>
 
+	<!--Corp de la page réservation-->	
 	<div id="containerReservation">
-		<!--Chargement de la page avec un pays choisi-->
-			<template id="templateReservationWithId">
-				<section>
-					<h1 >Réservation pour {{villeId}}</h1>
-					<p class="descriptionDest">{{Description}}</p>
-				</div>	
-
-					<form method="post" class="formulaire">
-						<h2 class="sousTitreResa">Quand voulez vous partir ? </h2>
-						<div id="dateD">
-							<label for="dateDepart">Date de départ: </label>
-							<input type="date" name="dateDepart" id="dateDepart" placeholder="Date de départ" onchange="calculerPrix()" required>	
-						</div>
-						<div id="dateA">
-							<label for="dateRetour">Date de retour: </label>
-							<input type="date" name="dateRetour" id="dateRetour" placeholder="Date d'arrivee" onchange="calculerPrix()" required>	
-						</div>
-						<div id="nbPartiA">
-							<label class="nombrePassager" for="nbAdulte">Nombre d'adultes </label>
-							<input type="number" name="nbAdulte" id="nbAdulte" value=0 min="0" max="100" onchange="calculerPrix()"  required>
-						</div>
-						<div id="nbPartiE">
-							<label class="nombrePassager"  for="nbEnfant">Nombre d'enfants </label>
-							<input type="number" name="nbEnfant" id="nbEnfant" value=0 min="0" max="100" onchange="calculerPrix()"  required>
-						</div>
-						<div id="petitDejeuner">
-							<label class="PtitDej" for="petitDej">Petit déjeuner ? </label>
-							<input type="checkbox" name="petitDej" id="petitDej" onchange="calculerPrix()" >
-						</div>
-						<div id="InfosComple" >
-							<label for="infoComple">Infos complementaire</label>
-							<input type="text" cols="40" rows="5" style="width:15vw; height:5vh;" name="infoComple" id="infoComple" required>
-						</div>
-						
-						<h2 class="sousTitreResa">Qui êtes vous ?</h2>
-
-						<div id="Name">
-							  <label class="InfoPerso" for="name">Name: </label>
-							  <input type="text" name="name" id="name" required>
-						</div>
-						<div id="Ursname">
-							  <label class="InfoPerso" for="username">Ursname: </label>
-							  <input type="text" name="username" id="username" required>
-						</div>
-						<div id="Email">
-							  <label class="InfoPerso" for="email">Email: </label>
-							  <input type="text" name="email" id="email" required>
-						</div>
-						<div id="Phone">
-							  <label class="InfoPerso" for="phone">Phone </label>
-							  <input type="tel" name="phone" id="phone" required>	
-						</div>
-
-						<div  class="Price">Prix :
-							<div id="thePrice" >0€</div>
-						</div>
-					</form>
-					<div id="imageDest" class="zoneImage" ></div>
-					<p id="errorMessage"></p>
-					<button class="validFormButton" onclick="validForm()">Valider</button>
-				</section>
-			</template>
 
 		<!--Chargement de la page avec un pays choisi-->
+		<template id="templateReservationWithId">
+			<section>
+				<h1 >Réservation pour {{villeId}}</h1>
+				<p class="descriptionDest">{{Description}}</p>	
+				<p id="errorMessage"></p>
 
-			<template id="templateReservationWithoutId">
-				<section>
-					<h1>Réservation </h1>
-					<p class="selectRes">Veuillez selectionner une destination</p>
-					<div>	{{ListeVille}} </div>	
-					<button class="reserverChoose" onclick="reserverChoose()">Valider</button>
-				</section>
-			</template>
+				<!--Zone du formulaire-->	
+				<form method="post" class="formulaire">
+					<INPUT TYPE="button" class="boutonCroix" VALUE="X" onClick="this.form.reset();">
+					<!--Renseignements sur le voyage-->	
+					<h2 class="sousTitreResa FirstSousTitre">Quand voulez vous partir ? </h2>
+					<div id="dateD">
+						<label for="dateDepart">Date de départ: </label>
+						<input type="date" name="dateDepart" id="dateDepart" placeholder="Date de départ" onchange="calculerPrix()" >	
+					</div>
+					<div id="dateA">
+						<label for="dateRetour">Date de retour: </label>
+						<input type="date" name="dateRetour" id="dateRetour" placeholder="Date d'arrivee" onchange="calculerPrix()" >	
+					</div>
+					<div id="nbPartiA">
+						<label class="nombrePassager" for="nbAdulte">Nombre d'adultes </label>
+						<input type="number" name="nbAdulte" id="nbAdulte" value=0 min="0" max="100" onchange="calculerPrix()"  >
+					</div>
+					<div id="nbPartiE">
+						<label class="nombrePassager"  for="nbEnfant">Nombre d'enfants </label>
+						<input type="number" name="nbEnfant" id="nbEnfant" value=0 min="0" max="100" onchange="calculerPrix()"  >
+					</div>
+					<div id="petitDejeuner">
+						<label class="PtitDej" for="petitDej">Petit déjeuner ? </label>
+						<input type="checkbox" name="petitDej" id="petitDej" onchange="calculerPrix()" >
+					</div>
+					<div id="InfosComple" >
+						<label for="infoComple">Infos complementaire</label>
+						<input type="text" cols="40" rows="5" style="width:15vw; height:5vh;" name="infoComple" id="infoComple" >
+					</div>
+					<!--Renseignements personnelles-->							
+					<h2 class="sousTitreResa">Qui êtes vous ?</h2>
+
+					<div id="Name">
+							<label class="InfoPerso" for="name">Name: </label>
+							<input type="text" name="name" id="name" value="" >
+					</div>
+					<div id="Ursname">
+							<label class="InfoPerso" for="username">Ursname: </label>
+							<input type="text" name="username" id="username" value="" >
+					</div>
+					<div id="Email">
+							<label class="InfoPerso" for="email">Email: </label>
+							<input type="text" name="email" id="email" value="" >
+					</div>
+					<div id="Phone">
+							<label class="InfoPerso" for="phone">Phone </label>
+							<input type="tel" name="phone" id="phone"  value="">	
+					</div>
+
+					<div  class="Price">Prix :
+						<div id="thePrice" >0€</div>
+					</div>
+				</form>
+				<div id="imageDest" class="zoneImage" ></div>
+				<button class="validFormButton" onclick="validForm()">Valider</button>
+			</section>
+		</template>
+
+		<!--Chargement de la page avec la liste déroulante de pays-->
+		<template id="templateReservationWithoutId">
+			<section>
+				<h1>Réservation </h1>
+				<p class="selectRes">Veuillez selectionner une destination</p>
+				<div>	{{ListeVille}} </div>	
+				<button class="reserverChoose" onclick="reserverChoose()">Valider</button>
+			</section>
+		</template>
 
 	</div>
-	<footer onload=htmlFooter()></footer>
+	<!--Template du footer dans le js-->	
+	<footer></footer>
 	</body>
 	
 </html>

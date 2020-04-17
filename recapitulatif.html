@@ -8,38 +8,42 @@
 
 	</head>
 		<body onload="initLoad()">
+	<!--Template du heder dans le js-->	
 	<header ></header>
 
-	<div id="recapitulatif">
+	<!--Corp de la page récapitlatif-->	
+	<section id="recapitulatif">
+		<!--Template du recap -->	
+		<h1>Récapitulatif du voyage</h1>
 		<template id="templateRecapitulatif">
-			<section>
-				<h1 class="recapTitle" >Récapitulatif pour voyage à {{villeName}}</h1>
+			<section class="zoneRecap">
+				<h2 class="recapTitle" >Voyage à {{villeName}}</h2>
 				<div class="recapNumResa" >Numéro réservation #{{numeroReservation}}</div>
+				<!--Elements personnelles-->	
 				<article class="info">	
-					<h2 class="sousTitreRecap">Informations personnelles</h2>
+					<h3 class="sousTitreRecap">Informations personnelles</h3>
 					<div class="elementPerso">Nom : <span>{{name}}</span> </div>
 					<div class="elementPerso">Prénom : <span>{{username}}</span></div>
 					<div class="elementPerso">Email : <span>{{email}}</span></div>
 					<div class="elementPerso">Télephone : <span>{{phone}}</span> </div>
 				</article>
+				<!--Elements voyage-->	
 				<article class="info">
-					<h2 class="sousTitreRecap" >Informations sur le voyage</h2>
+					<h3 class="sousTitreRecap" >Informations sur le voyage</h3>
 					<div class="elementVoyage">Voyage à {{villeName}} du {{lesDates}} pour {{lesVoyageurs}} </div>
 					<div class="elementDestination">{{descriptionDestination}}</div>
 					<div class="elementAutre">{{autresInformation}}</div>
-
-
 				</article>
+				<!--Elements prix-->	
 				<article class="info">
-					<h2 class="sousTitreRecap" >Information sur le prix</h2>
+					<h3 class="sousTitreRecap" >Information sur le prix</h3>
 					{{theTable}}
                     <div class="PrixTotal"> Total: {{prixTotal}}€</div>
 				</article>
-
 			</section>
 		</template>
-	</div>
-
+	</section>
+	<!--Template du footer dans le js-->	
 	<footer></footer>
 	</body>
 </html>
