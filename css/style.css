@@ -8,7 +8,7 @@
   }
   @font-face {
     font-family:"california";
-    src: url('Font/California.woff.woff')format("woff"),
+    src: url('Font/California.woff')format("woff"),
     url('Font/California.otf')format("opentype")
   }
    
@@ -64,6 +64,16 @@ section h1{
   text-align: center;
   font-size: 2.5em;
   font-family:'shopie';
+  font-weight:normal;
+  font-style:normal;
+
+
+}
+section h2{
+  color:#289c96;
+  text-align: center;
+  font-size: 2em;
+  font-family:'California';
   font-weight:normal;
   font-style:normal;
 
@@ -586,6 +596,8 @@ PAGE DE CONTACT
   max-width: 40vh;
 
 }
+
+
 
 
 .photo {
