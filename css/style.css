@@ -24,7 +24,6 @@ header{
     margin-left:5%;
     border-bottom:#7bdbd6 5px solid;
 }
-
 header h1 {
   font-size:5em;
   height:15vh;
@@ -37,9 +36,7 @@ header h1 {
   margin-top: auto;
   margin-bottom: auto;
 }
-
-
-  header img {
+header img {
     width: auto;
     max-width: 34%;
     height: 22vh;
@@ -136,6 +133,7 @@ nav ul li:hover ul li{
 nav ul li ul a:hover{
     color:#09c9bf;
   }
+
 /*//////////////////////////////////////////////////////////////
 PAGE DACCUEIL 
  //////////////////////////////////////////////////////////////*/
@@ -220,9 +218,7 @@ opacity:1;
   position:relative;
   margin-left:98%;
 }
-
-.textMeteo
-{
+.textMeteo{
   margin-left:-3vh;
   margin-top:1vh;
   position: absolute;
@@ -249,7 +245,6 @@ opacity:1;
   font-size:1.1em;
   height:1vh;
 }
-
 .zoneFiltre h3{
   font-size:0.9em;
   height:5vh;
@@ -271,7 +266,6 @@ opacity:1;
   height:15vh;
   background-color:white;
 }
-
 .filtreContinent select{
   font-size:1em;
 
@@ -279,8 +273,7 @@ opacity:1;
   margin-left:10%; 
   margin-top:2%;
 }
-.filtrePrix
-{
+.filtrePrix{
   margin-top:-15.5vh;
   width:30%;
   margin-left:36%;
@@ -289,7 +282,6 @@ opacity:1;
   background-color:white;
   border-right:2px solid #bce9eb;
 }
-
 .filtrePrix input{
   background-color:#d5dadb;
    border:0; 
@@ -297,7 +289,6 @@ opacity:1;
    text-align:center;
    font-weight:bold;
 }
-
 .rangeFiltre{
   width:80%; 
   margin-left:10%; 
@@ -307,19 +298,19 @@ opacity:1;
   
 margin-left: 10%;
 }
+
 /*//////////////////////////////////////////////////////////////
 PAGE RESERVERTION
  //////////////////////////////////////////////////////////////*/
 
  /*General*/
- label{
+label{
   width:15vw;
   height:1vh;
   display: inline-block;
   text-align:right;
   margin-left:-10%;
 }
-
 .descriptionDest{
   width:80vw;
   margin-left:10vw;
@@ -328,7 +319,6 @@ PAGE RESERVERTION
   padding:2vh;
   background-color: rgba(255, 255, 255, 0.7);
 }
-
 .zoneImage{
   border: #b7bdbc solid 1px; 
   margin-right:3vw;
@@ -336,8 +326,6 @@ PAGE RESERVERTION
   height:90vh; 
   background-color:black; float:right;
 }
-
-
  /*le formulaire*/
  
 .formulaire{
@@ -357,6 +345,9 @@ PAGE RESERVERTION
   font-size:2.8vh;
   border-bottom: #99a3a3 2px solid;
   margin-right:10%;
+}
+.FirstSousTitre{
+  margin-top:-5vh;
 }
 .formulaire input[type=text]  {
   width: 15vw;
@@ -400,7 +391,6 @@ PAGE RESERVERTION
   box-sizing: border-box;
   margin-left:2%;
 }
-
 .nombrePassager{
   width:15vw;
   height:1vh;
@@ -408,7 +398,6 @@ PAGE RESERVERTION
   text-align:right;
   margin-left:-1vw;
 }
-
 
 /*Prix validation et erreur*/
 .Price{
@@ -443,38 +432,44 @@ PAGE RESERVERTION
     font-weight: bold;
     visibility:hidden;
 }
+.boutonCroix{
+  height: 6vh;
+  width: 6vh;
+  font-size:3vh;
+  font-weight: bold;
+  background-color:#09c9bf;
+  margin-left:90%;
+  margin-top:2vh;
+}
+
 /*Page choix de la réservation */
-select
-{
+select{
   width: 50vw;
   margin-left: 25%;
   font-size: 1.5em;
 }
-.selectRes
-{
+.selectRes{
   text-align: center;
     font-size: 1.3em;
     font-weight: bold
 }
-.reserverChoose
-{
+.reserverChoose{
   font-size: 1.2em;
   width: 30%;
   margin-top: 6vh;
   margin-left: 35%;
 }
+
 /*//////////////////////////////////////////////////////////////
 PAGE RECAPITULATIF
  //////////////////////////////////////////////////////////////*/
-.zoneRecap{
+
+ .zoneRecap{
   background-color: white;
   width:80%;
   margin-left:10%;
 }
-
-
- .recapTitle
-{
+ .recapTitle{
   color:#289c96;
   text-align: center;
   font-size: 1.8em;
@@ -482,7 +477,6 @@ PAGE RECAPITULATIF
   padding:8vh;
   height:20vh;
 }
-
 .recapNumResa{
   font-weight: bold;
   width:20%;
@@ -492,7 +486,6 @@ PAGE RECAPITULATIF
   margin-bottom:2%;
   
 }
-
 .sousTitreRecap{
   text-align: left;
   height:5%;
@@ -500,14 +493,11 @@ PAGE RECAPITULATIF
   color:#74cfcc;
   border-bottom: #99a3a3 2px solid;
 }
-
-.info
-{
+.info{
   width:86%;
   margin-left:7%;
   padding-bottom:3%;
 }
-
 .elementPerso{
   display: inline-block;
   width:48%;
@@ -520,7 +510,6 @@ PAGE RECAPITULATIF
   font-weight: normal;
   margin-left:1%;
 }
-
 .elementVoyage{
   font-size:1.2em;
   text-align: center;
@@ -535,12 +524,10 @@ PAGE RECAPITULATIF
   margin-top:2%;
   text-align:right;
 }
-
 .elementPrix{
   display: inline-block;
   width:48%;
 }
-
 table {
   border-collapse: collapse;
   width: 90%;
@@ -626,7 +613,7 @@ height:auto;}
 
 
 /*//////////////////////////////////////////////////////////////
-Bouton  
+BOUTON RETOUR HAUT
  //////////////////////////////////////////////////////////////*/
 #myBtn {
   display: none;
@@ -649,21 +636,9 @@ Bouton
 }
 
 .flecheDuHaut{
-  height: 4vh;
+  height: 2.5vh;
   transform: rotate(-90deg);
     width: auto;
 }
 
-.FirstSousTitre{
-  margin-top:-5vh;
-}
-.boutonCroix{
-  height: 6vh;
-  width: 6vh;
-  font-size:3vh;
-  font-weight: bold;
-  background-color:#09c9bf;
-  margin-left:90%;
-  margin-top:2vh;
-}
 

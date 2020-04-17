@@ -31,21 +31,25 @@ function htmlFooter()
 	<img src="css/images/fleche.png" class="flecheDuHaut"></button>
 			<p>© Copyright 2019-2020 Fourel-Gauthier- Tous droits réservés</p>`
 }
-
+// Quand un utilisateur scroll a plus de 60px du hautt un bouton apparait
+window.onscroll = function() {
+	mybutton = document.getElementById("myBtn");
+	scrollFunction()
+};
+//Fonction qui détermine l'affichage du bouton pour remonter en haut en fonction du scroll
 function scrollFunction() {
-	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+	if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
 	  mybutton.style.display = "block";
 	} else {
 	  mybutton.style.display = "none";
 	}
 }
-
+//Remonte le scroll à 0
   function topFunction() {
 	document.body.scrollTop = 0;
 	document.documentElement.scrollTop = 0;
   }
  
-
 //Fonction pour le chargement de toute les pages
 function initLoad()
 {
@@ -108,20 +112,22 @@ function chargementPageIndex()
 		document.getElementById('containeVoyage').appendChild(clone);
 		temperature(v.id,v.destination);
 	};
-		slidderFunction();
+	slidderFunction();
 
 }
+
+//Fonction lorsque on change les filtres
 function changementDestination()
 {
-	//ajoute et trie en fonction des val
+
+	//Suppression des ancienne valeur
 	var template = document.querySelector("#templateVoyage");
 	for (var v of lesDestinations) {
 		$( "#"+v.ShortName ).remove();
 
 	}
 	continent=document.getElementById('continent-select').value;
-
-
+	//ajoute et trie en fonction des filtres
 	for (var v of lesDestinations) {
 		//trie en fonction du prix
 		if(v.prixVoyage>=prixMin&&v.prixVoyage<=prixMax)
@@ -150,62 +156,38 @@ function changementDestination()
 
 }
 
+//Récuperation de l'option animaux choisie
 function animauxChange(){
 
 	optAnimaux=document.getElementById("optAnimaux").checked;
 	changementDestination();
 }
+//Récupération de l'option wifi choisi
 function wifiChange(){
 
 	optWifi=document.getElementById("optWiFi").checked;
 	changementDestination();
 }
-
-//Fonction pour le slidder
+//Fonction pour le slidder du prix
 function slidderFunction(){
 	$( function () {
 		$( "#slider-range" ).slider({
-  range: true,
-  min: 0,
-  max: 1500,
-  step:20,
-  values: [ 50, 1500 ],
-  slide: function( event, ui ) {
-	$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-	prixMax=ui.values[1];
-	prixMin=ui.values[0];
-  }
-		});
-	$( "#amount" ).val( prixMin + " € - "+ prixMax +" €");
-	console.log("lesDestination") 
-} );
-}
-function getVals(){
-// Get slider values
-var parent = this.parentNode;
-var slides = parent.getElementsByTagName("input");
-  var slide1 = parseFloat( slides[0].value );
-  var slide2 = parseFloat( slides[1].value );
-// Neither slider will clip the other, so make sure we determine which is larger
-if( slide1 > slide2 ){ var tmp = slide2; slide2 = slide1; slide1 = tmp; }
-
-var displayElement = parent.getElementsByClassName("rangeValues")[0];
-	displayElement.innerHTML = "$ " + slide1 + "k - $" + slide2 + "k";
-}
-window.onload = function(){
-// Initialize Sliders
-var sliderSections = document.getElementsByClassName("range-slider");
-	for( var x = 0; x < sliderSections.length; x++ ){
-	  var sliders = sliderSections[x].getElementsByTagName("input");
-	  for( var y = 0; y < sliders.length; y++ ){
-		if( sliders[y].type ==="range" ){
-		  sliders[y].oninput = getVals;
-		  // Manually trigger event first time to display values
-		  sliders[y].oninput();
-		}
-	  }
+	range: true,
+	min: 0,
+	max: 1500,
+	step:20,
+	values: [ 50, 1500 ],
+	slide: function( event, ui ) {
+		$( "#amount" ).val(ui.values[ 0 ] + "€ - " + ui.values[ 1 ] + "€" );
+		prixMax=ui.values[1];
+		prixMin=ui.values[0];
 	}
+			});
+		$( "#amount" ).val( prixMin + " € - "+ prixMax +" €");
+		console.log("lesDestination") 
+	} );
 }
+
 //Récupération de la température et maj du site
 function temperature(id,dest){
 	//Crée la requète a l'api openweathermap
@@ -232,7 +214,7 @@ function reservation(id)
 {
 	window.location.assign("http://127.0.0.1:5500/reservation.html?id="+id);
 }
-//Lien pour réservation de l'onglet réservation
+//Lien pour réservation de l'onglet réservation affichage de la liste des destinations possibles
 function reserverChoose() {
 	
 	var id=document.getElementById('listeVille').value;
@@ -346,6 +328,7 @@ function validForm()
 					{
 						majErrorZone("Il faut au moins un adulte");
 					}
+					//Le formulaire est valider on enregistre les information et envoie sur la page recap
 					else
 					{
 						//On créer le numéro de reservation
@@ -373,7 +356,7 @@ function validForm()
 
 
 }
-
+//Fonction pour la mise a jour d'une erreur
 function majErrorZone(text)
 {
 	var errorZone=document.getElementById("errorMessage");
@@ -392,52 +375,57 @@ function calculerPrix()
 	var nbE= new Number(document.getElementById("nbEnfant").value);
 	var petitDej=document.getElementById("petitDej").checked;
 	var lePrix= document.getElementById("thePrice");
-	//Si une des dates est vide
+	//Si date de départ non vide
 	if(dD!="Invalid Date")
 	{
-		ValiderDateDepart(document.getElementById("dateDepart").value);
-
-	}
-	if(dD!="Invalid Date"&&dR!="Invalid Date" && nbA!=0)
- 	{
-		//On calcule de nombre de jour
-		var nbJ=dateDiff(dD,dR);
-		if(nbJ.day<0)
+		//On vérifie qu'elle est supérieur à aujourd'hui
+		if(ValiderDateDepart(document.getElementById("dateDepart").value)==true)
+		
 		{
-			//AFFICHER UN MESSAGE DERREUR
-			majErrorZone("La date de retour ne peut pas être antérieur à la date de l'aller");
-			lePrix.innerHTML="0€";
+			//Si date de retour et plus d'un adulte
+			if(dR!="Invalid Date" && nbA!=0)
+			{
+				//On calcule de nombre de jour
+				var nbJ=dateDiff(dD,dR);
+				if(nbJ.day<0)
+				{
+					//Si le nombre de jour est négatif affichage message d'erreur
+					majErrorZone("La date de retour ne peut pas être antérieur à la date de l'aller");
+					lePrix.innerHTML="0€";
 
 
+				}
+				//On a un nombre de jour positif, au moins un adulte et des dates valide : on calcule
+				else
+				{
+					var prixPetitDej=0;
+					console.log(petitDej);
+					if(petitDej==true)
+					prixPetitDej=12;
+
+					console.log(prixPetitDej)
+					//On récupère les variables nécessaires
+					var prixVoyage=sessionStorage.getItem("prixVoyage"); 
+					var prixHotel=sessionStorage.getItem("prixHotel"); 
+
+					var PrixVol=((nbA*prixVoyage)+(nbE*prixVoyage*0.4));
+					
+					var PrixHotel=(nbA*prixHotel*nbJ.day)+(nbE*(prixHotel*0.4)*nbJ.day)+((nbE+nbA)*nbJ.day*prixPetitDej);
+					var PrixTotal=PrixVol+PrixHotel;
+					sessionStorage.setItem("prixTotalVol",PrixVol);
+					sessionStorage.setItem("prixTotalHotel",PrixHotel);
+
+					lePrix.innerHTML=PrixTotal+"€";
+
+				}
+
+			}
+			else
+			{
+				lePrix.innerHTML="0€";
+			}
 		}
-		//On a un nombre de jour positif 
-		else
-		{
-			var prixPetitDej=0;
-			console.log(petitDej);
-			if(petitDej==true)
-			prixPetitDej=12;
 
-			console.log(prixPetitDej)
-			//On récupère les variables nécessaires
-			var prixVoyage=sessionStorage.getItem("prixVoyage"); 
-			var prixHotel=sessionStorage.getItem("prixHotel"); 
-
-			var PrixVol=((nbA*prixVoyage)+(nbE*prixVoyage*0.4));
-			
-			var PrixHotel=(nbA*prixHotel*nbJ.day)+(nbE*(prixHotel*0.4)*nbJ.day)+((nbE+nbA)*nbJ.day*prixPetitDej);
-			var PrixTotal=PrixVol+PrixHotel;
-			sessionStorage.setItem("prixTotalVol",PrixVol);
-			sessionStorage.setItem("prixTotalHotel",PrixHotel);
-
-			lePrix.innerHTML=PrixTotal+"€";
-
-		}
-
-	}
-	else
-	{
-		lePrix.innerHTML="0€";
 	}
 }
 //Verifiier date de depart superieur a date aujourd'huii
@@ -460,6 +448,8 @@ function ValiderDateDepart(dateDep)
 	}
 	else
 	{
+		var lePrix= document.getElementById("thePrice");
+		lePrix.innerHTML="0€";
 		majErrorZone("Date de départ doit être supérieur à aujourd'hui");
 		return false;
 	}
@@ -681,24 +671,7 @@ function getMoisDate(number)
 }
 
 
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {
-	mybutton = document.getElementById("myBtn");
-	scrollFunction()
-};
 
-function scrollFunction() {
-  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
-  }
-}
 
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-}
 
 
