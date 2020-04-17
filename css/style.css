@@ -6,6 +6,12 @@
   src:  url('Font/shopie-webfont.woff') format("woff"),
   url('Font/Shopie.otf') format("opentype")
   }
+  @font-face {
+    font-family:"california";
+    src: url('Font/California.woff.woff')format("woff"),
+    url('Font/California.otf')format("opentype")
+  }
+   
 
 /*//////////////////////////////////////////////////////////////
 EN TETE & GENERAL
@@ -79,13 +85,14 @@ MENU DE NAVIGATION
 
  nav{
     height: auto;
-    font-family:'capture_itregular', Trebuchet MS, sherif;
+    font-family:'california', Trebuchet MS, sherif;
     opacity: 0.9;
     width: 60%;
     margin-left:35%;
     margin-bottom: 2%;
     margin-top:-5%;
     z-index:3;
+    font-size: 3vh;
 }
 nav ul{
       list-style-type: none;
@@ -557,16 +564,18 @@ PAGE DE CONTACT
 	padding: 2vh;
 	background: #f0f0ef;
 	text-align: center;
-	padding-top: 5em;
+  padding-top: 5em;
+  opacity :0.95;
 }
 .container-contact:nth-child(odd) {
 	width: 80%;
-	height: auto;
+	height: 16vh;
 	margin: 0 auto;
 	padding: 2vh;;
 	background: white;
 	text-align: center;
-	padding-top: 5em;
+  padding-top: 5em;
+  opacity :0.90;
 }
 .contact {
 	display: inline-block;
@@ -579,16 +588,26 @@ PAGE DE CONTACT
 	width: 130px;
 height:auto;}
 
-.imageTogether{
+#imageTogether{
   width:15vw;
   height:auto;
   position:absolute;
-  margin-top:-20vh;
-  margin-left:180vh;
+  margin-top:2vh;
+  margin-left:18vh;
 }
+
+#name{
+  font-family:california,'Trebuchet MS',serif;
+  font-size: 5vh;
+  color :#289c96;
+  opacity :1;
+}
+
+
 .icon {
 	width: 100px;
-	height: 100px;
+  height: 100px;
+  opacity:1;
 }
 
 
@@ -612,7 +631,7 @@ Bouton
 }
 
 #myBtn:hover {
-  background-color: #09c9bf;;
+  background-color: #09c9bf;
 }
 
 .flecheDuHaut{
