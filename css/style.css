@@ -1,7 +1,11 @@
 /*//////////////////////////////////////////////////////////////
  DEFINITION DES POLICES PERSONNALISES
  //////////////////////////////////////////////////////////////*/
-
+ @font-face {
+  font-family: "shopie";
+  src:  url('Font/shopie-webfont.woff') format("woff"),
+  url('Font/Shopie.otf') format("opentype")
+  }
 
 /*//////////////////////////////////////////////////////////////
 EN TETE & GENERAL
@@ -13,6 +17,7 @@ header{
     display: flex;
     flex-direction:column;
     background-color: rgba(255, 255, 255, 0.9);
+    font:"myFont";
     
     margin-bottom: 2%;
     margin-top:2%;
@@ -20,24 +25,26 @@ header{
     border-bottom:#7bdbd6 5px solid;
 }
 
-header h1{ 	
-	font-size: 3.6em;
-	font-family: 'indie_flowerregular', 'Trebuchet MS', serif; 
+header h1 {
+  font-size: 7em;
+  font-family: 'shopie', 'Trebuchet MS', serif;
   color: #09c9bf;
-  font-weight:bold;
+  font-weight: normal;
   z-index: 4;
-  margin-left:4%;
-  width:35%;
+  margin-left: 4%;
+  width: 34%;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
-header img{
-    width: 20%;
-    height: 22%;
-    position: absolute;
-    z-index:1;
-    left:5%;
-    top:1%;
 
+  header img {
+    width: auto;
+    height: 11em;
+    position: absolute;
+    z-index: 1;
+    left: 5%;
+    top: 1%;
 }
 body{
   /*background-color:white;*/
@@ -48,6 +55,9 @@ section h1{
   color:#289c96;
   text-align: center;
   font-size: 1.9em;
+  font-family:'shopie';
+  font-weight:normal;
+  font-style:normal;
 
 }
 
@@ -589,7 +599,7 @@ Bouton
   font-size: 18px;
   border: none;
   outline: none;
-  background-color: red;
+  background-color: #7bdbd6;
   color: white;
   cursor: pointer;
   padding: 15px;
@@ -597,5 +607,6 @@ Bouton
 }
 
 #myBtn:hover {
-  background-color: #555;
+  background-color: #09c9bf;;
 }
+

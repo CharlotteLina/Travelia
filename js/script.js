@@ -7,6 +7,7 @@ var prixMax=2000;
 var continent="tous";
 var optAnimaux=false;
 var optWifi=false;
+var mybutton ;
 ////////////////////////////
 ///FONCTIONS GENERALES ///
 ////////////////////////////
@@ -25,6 +26,8 @@ function htmlHeader()
 //Modèle pour le pied de page
 function htmlFooter()
 {
+
+	
 
 	return 	`<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 			<p>© Copyright 2019-2020 Fourel-Gauthier- Tous droits réservés</p>`
@@ -675,5 +678,24 @@ function getMoisDate(number)
 }
 
 
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {
+	mybutton = document.getElementById("myBtn");
+	scrollFunction()
+};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
 
 
