@@ -12,16 +12,20 @@
 	</head>
 
 	<body onload="initLoad()">
+	<!--Template du header dans le js-->	
 	<header ></header>
 
+	<!--Corp de la page d'accueil-->	
 	<section>
+
 		<h1>Bienvenue sur Travelia</h1>
 		<p class="introduction">Choissisez une destination pour enfin aller au bout de vos rêves</p>
 		
+		<!--La zone des filtres-->	
 		<section class="zoneFiltre">
 			<article class="filtreContinent">
 				<h3 style="margin-top:2vh;">Choisir un continent : </h3>
-				<select name="continent" id="continent-select" onchange="changementDestination()">
+				<select name="continent" id="continent-select" onchange="changementDestination()" style="width:80%; margin-left:10%; margin-top:2%;">
 				<option value="tous">Tous</option>
 				<option value="Asie">Asie</option>
 				<option value="Afrique">Afrique</option>
@@ -45,19 +49,17 @@
 					<label class="optWiFi" for="optWiFi">Wifi proposé</label>
 					<input type="checkbox" name="optWiFi" id="optWiFi" onchange="wifiChange()"  >
 				</div>
-
 			</article>
-
 		</section>
 
+		<!--La grille pour l'affichage des destinations-->	
 		<div class="grid-container" id="containeVoyage">   
 		<template id="templateVoyage">
 				<div class="grid-item" id="paysAffiche">
-
 					<div class="meteo"><span class="textMeteo" id={{monId}}></span></div>
-
 					<div class="grid-content">
-					<p><span class="destinationTitre">{{destination}}</span>A partir de {{prix}} € </p>
+					<p class="destinationTitre">{{destination}}</p>
+					<p>A partir de {{prix}}€  </p>
 					<button onclick="reservation('{{monId}}')">Réserver</button>
 					</div>
 				</div>
@@ -65,7 +67,7 @@
 		</template>
 		</div>
 	</section>
-
+		<!--Template du footer ader dans le js-->	
 	<footer></footer>
 	</body>
 </html>

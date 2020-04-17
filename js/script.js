@@ -27,9 +27,8 @@ function htmlHeader()
 function htmlFooter()
 {
 
-	
-
-	return 	`<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+	return 	`<button onclick="topFunction()" id="myBtn" title="Go to top">
+	<img src="css/images/fleche.png" class="flecheDuHaut"></button>
 			<p>© Copyright 2019-2020 Fourel-Gauthier- Tous droits réservés</p>`
 }
 

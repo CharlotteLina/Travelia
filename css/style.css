@@ -26,7 +26,8 @@ header{
 }
 
 header h1 {
-  font-size: 15vh;
+  font-size:5em;
+  height:15vh;
   font-family: 'shopie', 'Trebuchet MS', serif;
   color: #09c9bf;
   font-weight: normal;
@@ -40,10 +41,11 @@ header h1 {
 
   header img {
     width: auto;
-    height: 28vh;
+    max-width: 34%;
+    height: 22vh;
     position: absolute;
     z-index: 1;
-    left: 15vh;
+    left: 6%;
     top: 1vh;
 }
 body{
@@ -54,7 +56,7 @@ body{
 section h1{
   color:#289c96;
   text-align: center;
-  font-size: 1.9em;
+  font-size: 2.5em;
   font-family:'shopie';
   font-weight:normal;
   font-style:normal;
@@ -187,13 +189,15 @@ margin-top:42%;
 }
 #containeVoyage .grid-content p{
 font-size:0.6em;
-margin-bottom: -0.6%;
+margin-top: -1%;
+margin-bottom: -1%;
+
 
 }
 #containeVoyage .grid-content .destinationTitre{
 margin-right:3%;
 color:#09c9bf;
-font-size: 1.6em;
+font-size: 1.1em;
 }
 #containeVoyage button{
 font-size:0.5em;
@@ -202,12 +206,13 @@ color:black;
 opacity:1;
 }
 .meteo{
-  background-color:black;
+  background-color:white;
   border-radius: 50%;
   font-size:3vh;
   vertical-align: center;
   padding:1.5vh;
-  color:#09c9bf;
+  border:2px solid #09c9bf;
+  color:black;
   width:6vh;
   height:6vh;
   font-weight: bold;
@@ -602,7 +607,7 @@ Bouton
   background-color: #7bdbd6;
   color: white;
   cursor: pointer;
-  padding: 15px;
+  padding: 1.5vh;
   border-radius: 4px;
 }
 
@@ -610,3 +615,8 @@ Bouton
   background-color: #09c9bf;;
 }
 
+.flecheDuHaut{
+  height: 4vh;
+  transform: rotate(-90deg);
+    width: auto;
+}
