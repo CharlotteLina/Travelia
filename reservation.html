@@ -1,30 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" href="css/style.css"/>
-		<script src='js\script.js'></script>
+		<script src='js/script.js'></script>
 
 		<title> Reservations </title>
 	</head>
 
-	<body onload="initLoad()">
+	<body onload="initLoad()" >
 	<header ></header>
 
-	<section>
-
-
+	<div id="containerReservation">
 		<!--Chargement de la page avec un pays choisi-->
-		<div id="containerReservationWithId"></div>
-		
 			<template id="templateReservationWithId">
-				<div>
-					<h2 >Réservations pour {{villeId}}</h2>
+				<section>
+					<h1 >Réservation pour {{villeId}}</h1>
 					<p class="descriptionDest">{{Description}}</p>
 				</div>	
-					<form method="post" class="formulaire" style="margin-left:3vw;width:58vw; border: #b7bdbc solid 1px;height:90vh;background-color: white;text-align:center; display:inline-block;">
-							<h3 class="sousTitreResa">Quand voulez vous partir ? </h3>
-
+					<form method="post" class="formulaire">
+						<h2 class="sousTitreResa">Quand voulez vous partir ? </h2>
 						<div id="dateD">
 							<label for="dateDepart">Date de départ: </label>
 							<input type="date" name="dateDepart" id="dateDepart" placeholder="Date de départ" onchange="calculerPrix()" required>	
@@ -34,11 +29,11 @@
 							<input type="date" name="dateRetour" id="dateRetour" placeholder="Date d'arrivee" onchange="calculerPrix()" required>	
 						</div>
 						<div id="nbPartiA">
-							<label class="NbP" for="nbAdulte">Nombre d'adultes </label>
+							<label class="nombrePassager" for="nbAdulte">Nombre d'adultes </label>
 							<input type="number" name="nbAdulte" id="nbAdulte" value=0 min="0" max="100" onchange="calculerPrix()"  required>
 						</div>
 						<div id="nbPartiE">
-							<label class="NbP"  for="nbEnfant">Nombre d'enfants </label>
+							<label class="nombrePassager"  for="nbEnfant">Nombre d'enfants </label>
 							<input type="number" name="nbEnfant" id="nbEnfant" value=0 min="0" max="100" onchange="calculerPrix()"  required>
 						</div>
 						<div id="petitDejeuner">
@@ -49,7 +44,8 @@
 							<label for="infoComple">Infos complementaire</label>
 							<input type="text" cols="40" rows="5" style="width:15vw; height:5vh;" name="infoComple" id="infoComple" required>
 						</div>
-						<h3 class="sousTitreResa">Qui êtes vous ?</h3>
+						
+						<h2 class="sousTitreResa">Qui êtes vous ?</h2>
 
 						<div id="Name">
 							  <label class="InfoPerso" for="name">Name: </label>
@@ -68,36 +64,29 @@
 							  <input type="tel" name="phone" id="phone" required>	
 						</div>
 
-						<div  style="font-size:1.2em;background-color:#c0f0ed; border:#ccd9d8 1px solid; width:10vw;height:5vh;margin-top:4vh;margin-left:25vw;padding:1.2vh;">Prix :
+						<div  class="Price">Prix :
 							<div id="thePrice" >0€</div>
 						</div>
 					</form>
-					<div id="imageDest" style="border: #b7bdbc solid 1px; margin-right:3vw;width:30vw; height:90vh; background-color:black; float:right;" ></div>
+					<div id="imageDest" class="zoneImage" ></div>
 					<p id="errorMessage"></p>
-
 					<button class="validFormButton" onclick="validForm()">Valider</button>
-					</div>
+				</section>
 			</template>
-
 
 		<!--Chargement de la page avec un pays choisi-->
-		<div id="containerReservationWithoutId">
-			<template id="TitleReservation">
-				<h2>Réservation </h2>
-				<p class="selectRes">Veuillez selectionner une destination</p>
-			</template>
-			<template id="templateReservationWithoutId">
 
+			<template id="templateReservationWithoutId">
+				<section>
+					<h1>Réservation </h1>
+					<p class="selectRes">Veuillez selectionner une destination</p>
 					<div>	{{ListeVille}} </div>	
 					<button class="reserverChoose" onclick="reserverChoose()">Valider</button>
-
+				</section>
 			</template>
 
-		</div>
-
-
-	</section>
-
+	</div>
 	<footer></footer>
 	</body>
+	
 </html>

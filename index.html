@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
 		<meta charset="utf-8"/>
-		<link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
-		<script src="js\script.js"></script>
+		<link rel="stylesheet" href="css/style.css">
+		<script src="js/script.js"></script>
+		<script type="text/javascript" src="/lib/jquery-3.4.1.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<title> PageAccueil </title>
 	</head>
 
@@ -11,15 +15,53 @@
 	<header ></header>
 
 	<section>
+		<h1>Bienvenue sur Travelia</h1>
+		<p class="introduction">Choissisez une destination pour enfin aller au bout de vos rêves</p>
+		
+		<section class="zoneFiltre">
+			<article class="filtreContinent">
+				<h3 style="margin-top:2vh;">Choisir un continent : </h3>
+				<select name="continent" id="continent-select" onchange="changementDestination()">
+				<option value="tous">Tous</option>
+				<option value="Asie">Asie</option>
+				<option value="Afrique">Afrique</option>
+				<option value="Amerique">Amerique</option>
+				<option value="Europe">Europe</option>
+				<option value="Oceanie">Oceanie</option>
+				</select>
+			</article>
+			<article class="filtrePrix">
+				<h3 style="margin-top:2vh;">Choisir un prix minimum et maximum : </h3>
+					<input type="text" id="amount" readonly style="background-color:#d5dadb; border:0; color:#1b9296; text-align:center;font-weight:bold;">
+					<div id="slider-range" onmouseup="changementDestination()" style="width:80%; margin-left:10%; margin-top:2%;"></div>
+			</article>
+			<article class="filtreOption">
+				<h3 style="margin-top:2vh;">Choisir des options : </h3>
+				<div class="optionFiltre">
+					<label class="optAnimaux" for="optAnimaux">Animaux accepté</label>
+					<input type="checkbox" name="optAnimaux" id="optAnimaux" onchange="animauxChange()"  >	
+				</div>
+				<div class="optionFiltre">
+					<label class="optWiFi" for="optWiFi">Wifi proposé</label>
+					<input type="checkbox" name="optWiFi" id="optWiFi" onchange="wifiChange()"  >
+				</div>
 
-		<div class="grid-container" id="containeVoyage">
+			</article>
+
+		</section>
+
+		<div class="grid-container" id="containeVoyage">   
 		<template id="templateVoyage">
-				<div class="grid-item">
+				<div class="grid-item" id="paysAffiche">
+
+					<div class="meteo"><span class="textMeteo" id={{monId}}></span></div>
+
 					<div class="grid-content">
-					<p id={{monId}}><span>{{destination}}</span>A partir de {{prix}} € </p>
+					<p><span class="destinationTitre">{{destination}}</span>A partir de {{prix}} € </p>
 					<button onclick="reservation('{{monId}}')">Réserver</button>
 					</div>
 				</div>
+
 		</template>
 		</div>
 	</section>
