@@ -40,11 +40,11 @@ header h1 {
 
   header img {
     width: auto;
-    height: 11em;
+    height: 28vh;
     position: absolute;
     z-index: 1;
-    left: 5%;
-    top: 1%;
+    left: 15vh;
+    top: 1vh;
 }
 body{
   /*background-color:white;*/
