@@ -589,7 +589,7 @@ PAGE DE CONTACT
 
 
 .photo {
-	width: 130px;
+width: 130px;
 height:auto;}
 
 #imageTogether{
@@ -600,8 +600,8 @@ height:auto;}
   margin-left:18vh;
 }
 
-#name{
-  font-family:california,'Trebuchet MS',serif;
+.name{
+  font-family:'california',serif;
   font-size: 5vh;
   color :#289c96;
   opacity :1;
