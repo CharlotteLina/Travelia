@@ -99,7 +99,7 @@ MENU DE NAVIGATION
     margin-bottom: 2%;
     margin-top:-5%;
     z-index:3;
-    font-size: 3vh;
+    font-size: 4vh;
 }
 nav ul{
       list-style-type: none;
@@ -255,12 +255,10 @@ opacity:1;
   border:1px solid #bce9eb;
 
 }
-.zoneFiltre h2{
-  margin-left: 3%;
-  color:#09c9bf;
-  padding:1vh;
-  font-size:1.1em;
-  height:1vh;
+.titleFiltre{
+text-align: left;
+margin-left:2%;
+margin-bottom:-2vh;
 }
 .zoneFiltre h3{
   font-size:0.9em;
@@ -594,7 +592,7 @@ PAGE DE CONTACT
 	padding: 2vh;
 	background: #f0f0ef;
 	text-align: center;
-  padding-top: 5em;
+  padding-top: 3em;
   opacity :0.95;
 }
 .container-contact:nth-child(odd) {
@@ -604,9 +602,10 @@ PAGE DE CONTACT
 	padding: 2vh;;
 	background: white;
 	text-align: center;
-  padding-top: 5em;
+  padding-top: 3em;
   opacity :0.90;
 }
+
 .contact {
 	display: inline-block;
 	justify-items: auto;
