@@ -28,7 +28,7 @@ function htmlFooter()
 {
 
 	return 	`<button onclick="topFunction()" id="myBtn" title="Go to top">
-	<img src="css/images/fleche.png" class="flecheDuHaut"></button>
+	<img src="css/icon/fleche.png" class="flecheDuHaut"></button>
 			<p>© Copyright 2019-2020 Fourel-Gauthier- Tous droits réservés</p>`
 }
 // Quand un utilisateur scroll a plus de 60px du hautt un bouton apparait
@@ -244,13 +244,29 @@ function chargementPageReservation()
 				let image=document.getElementById('imageDest');
 				image.style.backgroundImage=v.imageRes;
 				image.style.backgroundSize="cover";
+				
+				//On conserve les prix, ville et description pour le recap
+				sessionStorage.setItem("prixVoyage",v.prixVoyage); 
+				sessionStorage.setItem("prixHotel",v.prixHotel); 
 				sessionStorage.setItem("ville",v.destination); 
 				sessionStorage.setItem("descriptionVille",v.description); 
 
-				//On conserve les prix 
-				sessionStorage.setItem("prixVoyage",v.prixVoyage); 
-				sessionStorage.setItem("prixHotel",v.prixHotel); 
-
+				console.log(v.animaux);
+				console.log(v.wifi);
+				var iconeWifi = document.getElementById("iconeWifi");	
+				if(v.wifi==true){
+				iconeWifi.setAttribute("src", "css/icon/wifi.png");
+				}
+				else{
+					iconeWifi.setAttribute("src", "css/icon/noWifi.png");
+				}
+				var iconeAnim = document.getElementById("iconeAnimaux");	
+				if(v.animaux==true){
+					iconeAnim.setAttribute("src", "css/icon/animal.png");
+				}
+				else{
+					iconeAnim.setAttribute("src", "css/icon/noAnimal.png");
+				}
 
 
 			}	
