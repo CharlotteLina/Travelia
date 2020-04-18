@@ -387,15 +387,6 @@ label{
   margin-left:2%;
 }
 
-.formulaire input[type=checkbox]  {
-  width: 2vw;
-  padding: 0.8vh 0.8vh;
-  margin: 0.8vh 0;
-  height:4vh;
-  box-sizing: border-box;
-  margin-left:4vh;
-}
-
 .formulaire input[type=date]  {
   width: 15vw;
   padding: 0.8vh 0.8vh;
@@ -405,6 +396,17 @@ label{
   margin-left:2%;
 
 }
+
+.formulaire input[type=checkbox]  {
+  width: 2vw;
+  padding: 0.8vh 0.8vh;
+  margin: 0.8vh 0;
+  height:4vh;
+  box-sizing: border-box;
+  margin-left:4vh;
+}
+
+
 .formulaire input[type=number]  {
   width: 5vw;
     padding: 0.8vh 0.8vh;
