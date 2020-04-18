@@ -480,6 +480,20 @@ select{
   margin-top: 6vh;
   margin-left: 35%;
 }
+#petitDejeuner label
+{
+  width:15vw;
+  margin-left:-35%;
+}
+.formulaire input[type=checkbox]  {
+  width: 2vw;
+  padding: 0.8vh 0.8vh;
+  margin: 0.8vh 0;
+  height:4vh;
+  box-sizing: border-box;
+  margin-left:4vh;
+}
+
 
 /*//////////////////////////////////////////////////////////////
 PAGE RECAPITULATIF
