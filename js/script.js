@@ -1,5 +1,6 @@
 var lesDestinations=[];
 var url=window.location.href;
+var urlShort="";
 var laDestinationChoisi=[];
 
 var prixMin=0;
@@ -18,7 +19,7 @@ function htmlHeader()
 	return 	 '<img src="css/images/logo.png">'+
 			 '<h1>Travelia</h1>'+
 			 '<nav> <ul> '+
-             '<li><a href="/index.html">Accueil</a></li>'+
+             '<li><a href="index.html">Accueil</a></li>'+
              '<li><a href="reservation.html">Réservation</a></li>'+
              '<li><a href="contact.html">A propos & Contact</a></li>'+
              '</ul> </nav> '
@@ -60,12 +61,16 @@ function initLoad()
 
 	//Preparation pour le chargement des différentes pages
 	var url=window.location.href;
+	var urlCut=url.split("/");
+	urlShort=urlCut[0]+"//"+urlCut[2];
+	
 	let testHome=url.indexOf("index");
 	let testReservation=url.indexOf("reservation");
 	let testRecapitulatif=url.indexOf("recapitulatif");
 
+
 	//Chargement des différentes destinations
-	fetch("http://127.0.0.1:5500/voyages.json").then(response => response.json()).then(response => {
+	fetch(urlShort+"/voyages.json").then(response => response.json()).then(response => {
 		lesDestinations=response;
 		console.log(lesDestinations);
 		//Chargement de la page d'accueil
@@ -96,6 +101,7 @@ function initLoad()
 //Fonction pour le chargement de la page accueil
 function chargementPageIndex()
 {
+
 	
 	var template = document.querySelector("#templateVoyage");
 	for (var v of lesDestinations) {
@@ -212,7 +218,7 @@ function temperature(id,dest){
 //Lien pour la réservation
 function reservation(id)
 {
-	window.location.assign("http://127.0.0.1:5500/reservation.html?id="+id);
+	window.location.assign(urlShort+"/reservation.html?id="+id);
 }
 //Lien pour réservation de l'onglet réservation affichage de la liste des destinations possibles
 function reserverChoose() {
@@ -503,7 +509,7 @@ function ValiderEmail(mail)
 function recapitulatif(numeroRes)
 {
 	//AJOUTER ID RESERVATION
-	window.location.assign("http://127.0.0.1:5500/recapitulatif.html?id+"+numeroRes);
+	window.location.assign(urlShort+"/recapitulatif.html?id+"+numeroRes);
 }
 //Fonction pour le chargement de la page récapitulatif
 function chargementPageRecapitulatif()
