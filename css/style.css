@@ -386,6 +386,12 @@ label{
   box-sizing: border-box;
   margin-left:2%;
 }
+#petitDejeuner label
+{
+  width:15vw;
+  margin-left:-35%;
+}
+
 
 .formulaire input[type=checkbox]  {
   width: 2vw;
@@ -481,11 +487,6 @@ select{
   width: 30%;
   margin-top: 6vh;
   margin-left: 35%;
-}
-#petitDejeuner label
-{
-  width:15vw;
-  margin-left:-35%;
 }
 
 
