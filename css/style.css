@@ -83,8 +83,14 @@ footer{
    text-align: center;
    font-family:'Trebuchet MS';
    color: black;
-   margin-top: 35px;
    font-size: 1em;
+   height:10vh;
+   background-color: white;
+}
+
+footer p{
+  margin-top: 12vh;
+  padding: 4vh;
 }
 /*//////////////////////////////////////////////////////////////
 MENU DE NAVIGATION 
